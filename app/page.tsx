@@ -1,65 +1,63 @@
-import Image from "next/image";
+"use client"
+
+import { useEffect, useRef, useState, useCallback } from "react"
+import { Sidebar } from "@/components/sidebar"
+import { AboutSection } from "@/components/about-section"
+import { ResumeSection } from "@/components/resume-section"
+import { ProjectsSection } from "@/components/projects-section"
+import { ArticlesSection } from "@/components/articles-section"
+import { ContactSection } from "@/components/contact-section"
 
 export default function Home() {
-  return (
-    <div className="flex min-h-screen items-center justify-center bg-zinc-50 font-sans dark:bg-black">
-      <main className="flex min-h-screen w-full max-w-3xl flex-col items-center justify-between py-32 px-16 bg-white dark:bg-black sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={100}
-          height={20}
-          priority
-        />
-        <div className="flex flex-col items-center gap-6 text-center sm:items-start sm:text-left">
-          <h1 className="max-w-xs text-3xl font-semibold leading-10 tracking-tight text-black dark:text-zinc-50">
-            To get started, edit the page.tsx file.
-          </h1>
-          <p className="max-w-md text-lg leading-8 text-zinc-600 dark:text-zinc-400">
-            Looking for a starting point or more instructions? Head over to{" "}
-            <a
-              href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Templates
-            </a>{" "}
-            or the{" "}
-            <a
-              href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Learning
-            </a>{" "}
-            center.
-          </p>
+    const containerRef = useRef<HTMLDivElement>(null)
+    const [activeSection, setActiveSection] = useState(0)
+
+    const sections = [
+        { component: <AboutSection key="about" />, title: "About" },
+        { component: <ResumeSection key="resume" />, title: "Resume" },
+        { component: <ProjectsSection key="projects" />, title: "Works" },
+        { component: <ArticlesSection key="articles" />, title: "Blog" },
+        { component: <ContactSection key="contact" />, title: "Get in Touch" },
+    ]
+
+    const handleNavigate = useCallback((index: number) => {
+        if (containerRef.current) {
+            const targetScroll = index * window.innerHeight
+            containerRef.current.scrollTo({
+                top: targetScroll,
+                behavior: "smooth",
+            })
+        }
+    }, [])
+
+    useEffect(() => {
+        const container = containerRef.current
+        if (!container) return
+
+        const handleScroll = () => {
+            const scrollPosition = container.scrollTop
+            const newActive = Math.round(scrollPosition / window.innerHeight)
+            setActiveSection(Math.min(newActive, sections.length - 1))
+        }
+
+        container.addEventListener("scroll", handleScroll)
+        return () => container.removeEventListener("scroll", handleScroll)
+    }, [sections.length])
+
+    return (
+        <div className="flex h-screen bg-background">
+            {/* Sidebar with Profile */}
+            <Sidebar activeSection={activeSection} onNavigate={handleNavigate} />
+
+            {/* Main content */}
+            <div ref={containerRef} className="flex-1 md:ml-32 overflow-y-scroll scroll-snap-container mb-20 md:mb-0">
+                {sections.map((section, idx) => (
+                    <div key={idx} className="scroll-snap-section relative" id={`section-${idx}`}>
+                        <div className="bg-pattern"></div>
+                        {section.component}
+                    </div>
+                ))}
+            </div>
         </div>
-        <div className="flex flex-col gap-4 text-base font-medium sm:flex-row">
-          <a
-            className="flex h-12 w-full items-center justify-center gap-2 rounded-full bg-foreground px-5 text-background transition-colors hover:bg-[#383838] dark:hover:bg-[#ccc] md:w-[158px]"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={16}
-              height={16}
-            />
-            Deploy Now
-          </a>
-          <a
-            className="flex h-12 w-full items-center justify-center rounded-full border border-solid border-black/[.08] px-5 transition-colors hover:border-transparent hover:bg-black/[.04] dark:border-white/[.145] dark:hover:bg-[#1a1a1a] md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Documentation
-          </a>
-        </div>
-      </main>
-    </div>
-  );
+    )
 }
