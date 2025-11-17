@@ -13,7 +13,7 @@ import {
     FileText,
     Briefcase,
     Edit3,
-    Mail
+    Mail, TextAlignStart, TextAlignEnd
 } from 'lucide-react'
 import { useTheme } from "./theme-provider"
 import Me from "@/components/Me";
@@ -58,10 +58,10 @@ export function Sidebar({ activeSection, onNavigate }: SidebarProps) {
             {/* Menu Button - Visible on both desktop and mobile */}
             <button
                 onClick={() => setIsDrawerOpen(!isDrawerOpen)}
-                className="fixed top-4 left-4 z-50 p-2 rounded-lg bg-card border border-border hover:bg-primary hover:text-primary-foreground transition-all duration-300"
+                className="fixed top-4 right-4 z-50 p-2  hover:bg-primary hover:text-primary-foreground transition-all duration-300 md:hidden"
                 title="Toggle menu"
             >
-                {isDrawerOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
+                {isDrawerOpen ? <X className="w-5 h-5" /> : <TextAlignEnd className="w-5 h-5" />}
             </button>
 
             {/* Overlay - Visible on both desktop and mobile */}
@@ -159,7 +159,7 @@ export function Sidebar({ activeSection, onNavigate }: SidebarProps) {
 
             {/* Mobile Bottom Navigation - Only visible on mobile */}
             {isMobile && (
-                <div className="fixed bottom-0 left-0 right-0 z-50 bg-card border-t border-border md:hidden">
+                <div className="fixed bottom-0 left-0 right-0 z-50  bg-card md:hidden border-t">
                     <div className="flex items-center justify-around h-20 px-4">
                         {sections.map((section) => {
                             const Icon = section.icon
@@ -185,8 +185,17 @@ export function Sidebar({ activeSection, onNavigate }: SidebarProps) {
             {!isMobile && (
                 <div className="flex p-2">
                     <div className="h-3/4 my-auto z-30 border-l border-b border-green-600 rounded-[100px]">
-                        <div className="hidden dark:bg-gray-800 bg-white/95 md:flex h-full my-auto -mr-5 rounded-[100px] m-2 w-24 border flex-col items-center justify-center">
+                        <div className="hidden bg-card md:flex h-full my-auto -mr-5 rounded-[100px] m-2 w-24 border flex-col items-center justify-center">
                             <div className="flex flex-col items-center justify-center gap-6 w-full">
+                                <div>
+                                    <button
+                                        onClick={() => setIsDrawerOpen(!isDrawerOpen)}
+                                        className=" hover:text-primary transition-all duration-300"
+                                        title="Toggle menu"
+                                    >
+                                        {isDrawerOpen ? <X className="w-5 h-5" /> : <TextAlignStart className="w-5 h-5" />}
+                                    </button>
+                                </div>
                                 <nav className="flex flex-col w-full">
                                     {sections.map((section) => {
                                         const Icon = section.icon
@@ -197,7 +206,7 @@ export function Sidebar({ activeSection, onNavigate }: SidebarProps) {
                                                 className={`flex flex-col items-center gap-2 transition-all duration-300 group relative py-2 px-3 ${
                                                     activeSection === section.id
                                                         ? "bg-primary/10 text-primary"
-                                                        : "text-gray-800 hover:bg-secondary/50"
+                                                        : "text-foreground hover:bg-secondary/50"
                                                 }`}
                                                 title={section.name}
                                             >
@@ -212,7 +221,7 @@ export function Sidebar({ activeSection, onNavigate }: SidebarProps) {
                                 </nav>
                                 <button
                                     onClick={toggleTheme}
-                                    className="w-full h-10 text-gray-800 hover:text-primary flex items-center justify-center transition-all duration-300"
+                                    className="w-full h-10 text-foreground hover:text-primary flex items-center justify-center transition-all duration-300"
                                     title="Toggle theme"
                                 >
                                     {resolvedTheme === "dark" ? (
