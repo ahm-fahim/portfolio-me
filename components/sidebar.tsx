@@ -24,11 +24,11 @@ export function Sidebar({ activeSection, onNavigate }: SidebarProps) {
     }, [])
 
     const sections = [
-        { name: "About", icon: "👤", id: 0 },
-        { name: "Resume", icon: "📄", id: 1 },
-        { name: "Projects", icon: "💼", id: 2 },
-        { name: "Articles", icon: "📝", id: 3 },
-        { name: "Contact", icon: "✉️", id: 4 },
+        { name: "ABOUT", icon: "👤", id: 0 },
+        { name: "RESUME", icon: "📄", id: 1 },
+        { name: "PROJECTS", icon: "💼", id: 2 },
+        { name: "ARTICLES", icon: "📝", id: 3 },
+        { name: "CONTACT", icon: "✉️", id: 4 },
     ]
 
     const handleNavClick = (index: number) => {
@@ -166,8 +166,8 @@ export function Sidebar({ activeSection, onNavigate }: SidebarProps) {
     return (
         <div className="flex p-2">
 
-            <div className="h-3/4 my-auto z-30 border-l border-b  border-green-600 rounded-[100px]">
-                <div className="hidden bg-white/95 md:flex h-full my-auto -mr-5  rounded-[100px] m-2 w-24 border flex-col items-center justify-center">
+            <div className="h-3/4 my-auto z-30 border-l border-b  border-green-600 rounded-[100px] ">
+                <div className="hidden dark:bg-gray-800  bg-white/95 md:flex h-full my-auto -mr-5  rounded-[100px] m-2 w-24 border flex-col items-center justify-center">
                     <div className="flex flex-col items-center justify-center gap-6 w-full">
                         <nav className="flex flex-col w-full">
                             {sections.map((section) => (
@@ -177,27 +177,27 @@ export function Sidebar({ activeSection, onNavigate }: SidebarProps) {
                                     className={`flex flex-col items-center gap-2 transition-all duration-300 group relative py-2 px-3 ${
                                         activeSection === section.id
                                             ? "bg-primary/10 text-primary"
-                                            : "text-muted-foreground hover:bg-secondary/50"
+                                            : "text-gray-800 hover:bg-secondary/50"
                                     }`}
                                     title={section.name}
                                 >
                                     <span className="text-xl">{section.icon}</span>
                                     <span className="text-xs text-center font-medium">{section.name}</span>
                                     {activeSection === section.id && (
-                                        <div className="absolute -right-2 top-1/2 -translate-y-1/2 w-1.5 h-6 bg-primary rounded-full"></div>
+                                        <div className="absolute -right-[53.2vh] top-1/2 -translate-y-1/2 w-1 h-full bg-primary"></div>
                                     )}
                                 </button>
                             ))}
                         </nav>
                         <button
                             onClick={toggleTheme}
-                            className="w-full h-10  bg-secondary hover:bg-primary hover:text-primary-foreground flex items-center justify-center transition-all duration-300"
+                            className="w-full h-10 text-gray-800 hover:text-primary flex items-center justify-center transition-all duration-300"
                             title="Toggle theme"
                         >
                             {resolvedTheme === "dark" ? (
-                                <Sun className="w-4 h-4" />
+                                <Sun className="w-6 h-6" />
                             ) : (
-                                <Moon className="w-4 h-4" />
+                                <Moon className="w-6 h-6" />
                             )}
                         </button>
                     </div>
