@@ -8,6 +8,7 @@ import { ProjectsSection } from "@/components/projects-section"
 import { ArticlesSection } from "@/components/articles-section"
 import { ContactSection } from "@/components/contact-section"
 
+
 export default function Home() {
     const containerRef = useRef<HTMLDivElement>(null)
     const [activeSection, setActiveSection] = useState(0)
@@ -48,9 +49,8 @@ export default function Home() {
         <div className="flex h-screen bg-background">
             {/* Sidebar with Profile */}
             <Sidebar activeSection={activeSection} onNavigate={handleNavigate} />
-
             {/* Main content */}
-            <div ref={containerRef} className="flex-1 md:ml-32 overflow-y-scroll scroll-snap-container mb-20 md:mb-0">
+            <div ref={containerRef} className="flex-1 md:ml-32 overflow-y-scroll border scroll-snap-container mb-20 md:mb-0">
                 {sections.map((section, idx) => (
                     <div key={idx} className="scroll-snap-section relative" id={`section-${idx}`}>
                         <div className="bg-pattern"></div>

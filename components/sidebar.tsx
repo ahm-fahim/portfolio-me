@@ -4,6 +4,7 @@
 import { useState, useEffect } from "react"
 import { Github, Linkedin, Moon, Sun, Menu, X } from 'lucide-react'
 import { useTheme } from "./theme-provider"
+import Me from "@/components/Me";
 
 interface SidebarProps {
     activeSection: number
@@ -163,41 +164,47 @@ export function Sidebar({ activeSection, onNavigate }: SidebarProps) {
 
     // Desktop layout
     return (
-        <div className="hidden md:flex h-3/4 my-auto rounded-[100px] m-4 w-24 border flex-col items-center justify-center">
-            <div className="flex flex-col items-center justify-center gap-6 w-full">
-                <nav className="flex flex-col w-full">
-                    {sections.map((section) => (
+        <div className="flex p-2">
+
+            <div className="h-3/4 my-auto z-30 border-l border-b  border-green-600 rounded-[100px]">
+                <div className="hidden bg-white/95 md:flex h-full my-auto -mr-5  rounded-[100px] m-2 w-24 border flex-col items-center justify-center">
+                    <div className="flex flex-col items-center justify-center gap-6 w-full">
+                        <nav className="flex flex-col w-full">
+                            {sections.map((section) => (
+                                <button
+                                    key={section.id}
+                                    onClick={() => handleNavClick(section.id)}
+                                    className={`flex flex-col items-center gap-2 transition-all duration-300 group relative py-2 px-3 ${
+                                        activeSection === section.id
+                                            ? "bg-primary/10 text-primary"
+                                            : "text-muted-foreground hover:bg-secondary/50"
+                                    }`}
+                                    title={section.name}
+                                >
+                                    <span className="text-xl">{section.icon}</span>
+                                    <span className="text-xs text-center font-medium">{section.name}</span>
+                                    {activeSection === section.id && (
+                                        <div className="absolute -right-2 top-1/2 -translate-y-1/2 w-1.5 h-6 bg-primary rounded-full"></div>
+                                    )}
+                                </button>
+                            ))}
+                        </nav>
                         <button
-                            key={section.id}
-                            onClick={() => handleNavClick(section.id)}
-                            className={`flex flex-col items-center gap-2 transition-all duration-300 group relative py-2 px-3 ${
-                                activeSection === section.id
-                                    ? "bg-primary/10 text-primary"
-                                    : "text-muted-foreground hover:bg-secondary/50"
-                            }`}
-                            title={section.name}
+                            onClick={toggleTheme}
+                            className="w-full h-10  bg-secondary hover:bg-primary hover:text-primary-foreground flex items-center justify-center transition-all duration-300"
+                            title="Toggle theme"
                         >
-                            <span className="text-xl">{section.icon}</span>
-                            <span className="text-xs text-center font-medium">{section.name}</span>
-                            {activeSection === section.id && (
-                                <div className="absolute -right-2 top-1/2 -translate-y-1/2 w-1.5 h-6 bg-primary rounded-full"></div>
+                            {resolvedTheme === "dark" ? (
+                                <Sun className="w-4 h-4" />
+                            ) : (
+                                <Moon className="w-4 h-4" />
                             )}
                         </button>
-                    ))}
-                </nav>
-                <button
-                    onClick={toggleTheme}
-                    className="w-full h-10  bg-secondary hover:bg-primary hover:text-primary-foreground flex items-center justify-center transition-all duration-300"
-                    title="Toggle theme"
-                >
-                    {resolvedTheme === "dark" ? (
-                        <Sun className="w-4 h-4" />
-                    ) : (
-                        <Moon className="w-4 h-4" />
-                    )}
-                </button>
+                    </div>
+                </div>
             </div>
 
+            <Me/>
         </div>
     )
 }

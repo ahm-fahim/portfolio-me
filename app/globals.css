@@ -159,3 +159,9 @@
     background-size: 40px 40px;
     pointer-events: none;
 }
+
+
+.trapezoid {
+    --p: 40px; /* control the shape (can be percentage) */
+    clip-path: polygon(100% var(--p),100% calc(100% - var(--p)),0 100%,0 0);
+}
