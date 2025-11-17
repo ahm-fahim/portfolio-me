@@ -50,7 +50,8 @@ export default function Home() {
             {/* Sidebar with Profile */}
             <Sidebar activeSection={activeSection} onNavigate={handleNavigate} />
             {/* Main content */}
-            <div ref={containerRef} className="flex-1 md:mr-10 my-auto md:h-[90vh] overflow-y-scroll border rounded-4xl scroll-snap-container">
+            {/* Main content */}
+            <div ref={containerRef} className="flex-1 overflow-y-scroll md:border md:rounded-4xl md:h-[90vh] md:my-auto scroll-snap-container  my-20 md:mr-10">
                 {sections.map((section, idx) => (
                     <div key={idx} className="scroll-snap-section relative" id={`section-${idx}`}>
                         <div className="bg-pattern"></div>
