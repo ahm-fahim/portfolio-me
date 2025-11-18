@@ -134,15 +134,15 @@
     }
     body {
         @apply bg-background text-foreground;
-        transition: background-color 0.3s ease, color 0.3s ease;
+        transition: background-color 0.5s ease, color 0.5s ease;
     }
 }
 
-/* Custom animations */
-@keyframes fade-in {
+/* Smooth scrolling animations */
+@keyframes fade-in-up {
     from {
         opacity: 0;
-        transform: translateY(10px);
+        transform: translateY(30px);
     }
     to {
         opacity: 1;
@@ -150,10 +150,32 @@
     }
 }
 
-@keyframes slide-in-right {
+@keyframes fade-in-down {
     from {
         opacity: 0;
-        transform: translateX(20px);
+        transform: translateY(-30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes fade-in-left {
+    from {
+        opacity: 0;
+        transform: translateX(-30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+@keyframes fade-in-right {
+    from {
+        opacity: 0;
+        transform: translateX(30px);
     }
     to {
         opacity: 1;
@@ -164,7 +186,7 @@
 @keyframes scale-in {
     from {
         opacity: 0;
-        transform: scale(0.9);
+        transform: scale(0.95);
     }
     to {
         opacity: 1;
@@ -172,24 +194,68 @@
     }
 }
 
-.animate-fade-in {
-    animation: fade-in 0.3s ease-out;
+@keyframes slide-in-up {
+    from {
+        transform: translateY(100%);
+        opacity: 0;
+    }
+    to {
+        transform: translateY(0);
+        opacity: 1;
+    }
 }
 
-.animate-slide-in-right {
-    animation: slide-in-right 0.3s ease-out;
+@keyframes slide-in-down {
+    from {
+        transform: translateY(-100%);
+        opacity: 0;
+    }
+    to {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+
+/* Smooth animation classes */
+.animate-fade-in-up {
+    animation: fade-in-up 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94) both;
+}
+
+.animate-fade-in-down {
+    animation: fade-in-down 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94) both;
+}
+
+.animate-fade-in-left {
+    animation: fade-in-left 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94) both;
+}
+
+.animate-fade-in-right {
+    animation: fade-in-right 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94) both;
 }
 
 .animate-scale-in {
-    animation: scale-in 0.2s ease-out;
+    animation: scale-in 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94) both;
 }
 
-/* Scroll snap container */
+.animate-slide-in-up {
+    animation: slide-in-up 0.7s cubic-bezier(0.25, 0.46, 0.45, 0.94) both;
+}
+
+.animate-slide-in-down {
+    animation: slide-in-down 0.7s cubic-bezier(0.25, 0.46, 0.45, 0.94) both;
+}
+
+/* Scroll snap container with smooth scrolling */
 .scroll-snap-container {
     scroll-snap-type: y mandatory;
     overflow-y: scroll;
     scroll-behavior: smooth;
     position: relative;
+    -webkit-overflow-scrolling: touch; /* Smooth scrolling on iOS */
+}
+
+.scroll-snap-container::-webkit-scrollbar {
+    display: none; /* Hide scrollbar for cleaner look */
 }
 
 .scroll-snap-section {
@@ -201,9 +267,15 @@
     justify-content: center;
     position: relative;
     overflow: hidden;
+    transition: transform 0.3s ease, opacity 0.3s ease;
 }
 
-/* Animated background pattern */
+/* Smooth section transitions */
+.scroll-snap-section:not(:target) {
+    animation: fade-in-up 0.8s ease-out both;
+}
+
+/* Enhanced pattern background */
 .bg-pattern {
     position: absolute;
     inset: 0;
@@ -213,11 +285,50 @@
             linear-gradient(-45deg, currentColor 1px, transparent 1px);
     background-size: 40px 40px;
     pointer-events: none;
+    animation: pattern-move 20s linear infinite;
+}
+
+@keyframes pattern-move {
+    0% {
+        background-position: 0 0;
+    }
+    100% {
+        background-position: 40px 40px;
+    }
+}
+
+/* Smooth hover effects */
+.smooth-hover {
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.smooth-hover:hover {
+    transform: translateY(-2px);
+}
+
+/* Smooth focus states */
+.smooth-focus:focus {
+    outline: 2px solid transparent;
+    outline-offset: 2px;
+    transition: outline-color 0.2s ease;
+}
+
+/* Performance optimizations for animations */
+@media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+        scroll-behavior: auto !important;
+    }
 }
 
 .trapezoid {
     --p: 40px; /* control the shape (can be percentage) */
     clip-path: polygon(100% var(--p),100% calc(100% - var(--p)),0 100%,0 0);
+    transition: clip-path 0.3s ease;
 }
 
 @layer base {
@@ -226,5 +337,35 @@
     }
     body {
         @apply bg-background text-foreground;
+    }
+}
+
+/* Enhanced smooth scrolling for the entire page */
+html {
+    scroll-behavior: smooth;
+}
+
+/* Smooth backdrop filter transitions */
+.backdrop-smooth {
+    backdrop-filter: blur(10px);
+    transition: backdrop-filter 0.3s ease;
+}
+
+/* Gradient animations */
+.gradient-animate {
+    background: linear-gradient(-45deg, #ee7752, #e73c7e, #23a6d5, #23d5ab);
+    background-size: 400% 400%;
+    animation: gradient 15s ease infinite;
+}
+
+@keyframes gradient {
+    0% {
+        background-position: 0% 50%;
+    }
+    50% {
+        background-position: 100% 50%;
+    }
+    100% {
+        background-position: 0% 50%;
     }
 }

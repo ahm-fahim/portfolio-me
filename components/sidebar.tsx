@@ -113,9 +113,7 @@ export function Sidebar({ activeSection, onNavigate }: SidebarProps) {
                 >
                     <Icon className="w-5 h-5" />
                     <span className="text-xs text-center font-medium">{section.name}</span>
-                    {isActive && (
-                        <div className="absolute -right-[53.2vh] top-1/2 -translate-y-1/2 w-1 h-full bg-green-600"></div>
-                    )}
+                    {/* The absolute green bar logic has been moved to the parent Sidebar component */}
                 </button>
             )
         }
@@ -246,7 +244,22 @@ export function Sidebar({ activeSection, onNavigate }: SidebarProps) {
                 <div className="flex p-2">
                     <div className="h-3/4 my-auto z-30 border-l border-b border-green-600 rounded-[100px]">
                         <div className="hidden bg-white dark:bg-black/95 dark:text-white md:flex h-full my-auto -mr-5 rounded-[100px] m-2 w-24 border border-gray-100 dark:border-gray-800 flex-col items-center justify-center">
-                            <div className="flex flex-col items-center justify-center gap-6 w-full">
+                            {/* **UPDATED SECTION: Added relative to container and the smoothly moving indicator** */}
+                            <div className="flex flex-col items-center justify-center gap-6 w-full relative">
+
+                                {/* 🌟 Smooth Moving Indicator Bar 🌟 */}
+                                <div
+                                    className="absolute  w-1 -right-[53.4vh] z-50 bg-green-600 transition-transform duration-500 ease-in-out"
+                                    style={{
+                                        // This ensures the indicator is approximately the height of one item slot
+                                        height: "14.5%",
+                                        // This moves the bar based on the active section (0%, 100%, 200%, etc.)
+                                        transform: `translateY(${activeSection * 100}%)`,
+                                        // Manual alignment for the first item's starting position
+                                        top: "50px", // Ensure it sits behind the buttons
+                                    }}
+                                ></div>
+
                                 <div>
                                     <button
                                         onClick={toggleDrawer}
@@ -256,7 +269,7 @@ export function Sidebar({ activeSection, onNavigate }: SidebarProps) {
                                         {isDrawerOpen ? <X className="w-5 h-5" /> : <TextAlignStart className="w-5 h-5" />}
                                     </button>
                                 </div>
-                                <nav className="flex flex-col w-full">
+                                <nav className="flex flex-col w-full z-10"> {/* z-10 ensures NavItems are above indicator */}
                                     {sections.map((section) => (
                                         <NavItem
                                             key={section.id}
