@@ -1,10 +1,11 @@
 "use client"
 
-import {FaJs, FaNode, FaPython, FaReact} from "react-icons/fa";
-import {SiMongodb, SiMysql, SiNestjs, SiNextdotjs, SiPhp} from "react-icons/si";
+import {FaJs, FaNode, FaPython, FaReact, FaServer} from "react-icons/fa";
+import {SiLinuxserver, SiMongodb, SiMysql, SiNestjs, SiNextdotjs, SiPhp} from "react-icons/si";
 import {BiLogoPostgresql} from "react-icons/bi";
 import {RiTailwindCssFill} from "react-icons/ri";
-import {TbBrandCpp} from "react-icons/tb";
+import {TbBrandCpp, TbWorldCheck} from "react-icons/tb";
+import {MdAdminPanelSettings} from "react-icons/md";
 
 export  function AboutSection() {
     return (
@@ -55,6 +56,34 @@ export  function AboutSection() {
             <div>
                 <div className="flex justify-start items-start border-b dark:border-gray-800 pb-3">
                     <h1 className="text-2xl font-bold"><span className="text-green-600">S</span>ervice</h1>
+                </div>
+
+                <div className="grid grid-cols-2 gap-4 py-4">
+
+                    <div className="p-4 bg-white/80 dark:bg-gray-800/70 border dark:border-gray-800 border-gray-200 rounded-xl flex flex-col items-center text-center justify-center w-full">
+                        <SiLinuxserver  className="bg-green-100 text-green-600 rounded-md p-2 text-5xl"/>
+                        <h1 className="text-xl  font-bold">Full Stack Web Application</h1>
+                        <p className="text-xs text-gray-600 dark:text-gray-400">End-to-end development with Next.js frontend, NestJS backend, and PostgreSQL database. Building scalable, maintainable applications with modern best practices.</p>
+                    </div>
+
+                    <div className="p-4 bg-white/80 dark:bg-gray-800/70 border dark:border-gray-800 border-gray-200 rounded-xl flex flex-col items-center text-center justify-center w-full">
+                        <FaServer  className="bg-green-100 text-green-600 rounded-md p-2 text-5xl"/>
+                        <h1 className="text-xl font-bold">Backend APIs</h1>
+                        <p className="text-xs text-gray-600 dark:text-gray-400">Secure, optimized API endpoints using NestJS. Efficient database queries, proper authentication, and scalable architecture for production applications.</p>
+                    </div>
+
+                    <div className="p-4 bg-white/80 dark:bg-gray-800/70 border dark:border-gray-800 border-gray-200 rounded-xl flex flex-col items-center text-center justify-center w-full">
+                        <MdAdminPanelSettings className="bg-green-100 text-green-600 rounded-md p-2 text-5xl"/>
+                        <h1 className="text-xl font-bold">Admin Dashboards</h1>
+                        <p className="text-xs text-gray-600 dark:text-gray-400">Complex admin panels with data visualization, CRUD operations, and user management. Clean, professional interfaces built with Next.js and Tailwind CSS.</p>
+                    </div>
+
+                    <div className="p-4 bg-white/80 dark:bg-gray-800/70 border dark:border-gray-800 border-gray-200 rounded-xl flex flex-col items-center text-center justify-center w-full">
+                        <SiLinuxserver  className="bg-green-100 text-green-600 rounded-md p-2 text-5xl"/>
+                        <h1 className="text-xl font-bold">Landing Pages</h1>
+                        <p className="text-xs text-gray-600 dark:text-gray-400">High-quality, responsive landing pages and marketing sites. Optimized for conversions with modern design principles and SEO best practices.</p>
+                    </div>
+
                 </div>
             </div>
         </div>
