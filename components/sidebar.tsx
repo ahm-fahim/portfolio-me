@@ -1,23 +1,23 @@
 // components/sidebar.tsx
 "use client"
 
-import React, { useState, useEffect } from "react"
+import React, { useState, useEffect, useCallback } from "react"
 import {
     Github,
     Linkedin,
-    Moon,
-    Sun,
-    Menu,
-    X,
     User,
     FileText,
     Briefcase,
     Edit3,
-    Mail, TextAlignStart, TextAlignEnd, MoonIcon, SunIcon
+    Mail,
+    TextAlignStart,
+    TextAlignEnd,
+    X,
+    LucideIcon
 } from 'lucide-react'
 import { useTheme } from "./theme-provider"
 import Me from "@/components/Me";
-import { IoMoonOutline } from "react-icons/io5";
+import { IoMoonOutline, IoPartlySunny } from "react-icons/io5";
 import TextType from "@/components/TextType";
 
 interface SidebarProps {
@@ -25,11 +25,45 @@ interface SidebarProps {
     onNavigate: (index: number) => void
 }
 
+interface Section {
+    name: string
+    icon: LucideIcon
+    id: number
+}
+
+interface SocialLink {
+    icon: LucideIcon
+    label: string
+    href: string
+}
+
+interface NavItemProps {
+    section: Section
+    isActive: boolean
+    onClick: (id: number) => void
+    variant?: "desktop" | "mobile-bottom" | "desktop-mini" | "drawer"
+}
+
 export function Sidebar({ activeSection, onNavigate }: SidebarProps) {
     const [isMobile, setIsMobile] = useState(false)
     const [isDrawerOpen, setIsDrawerOpen] = useState(false)
     const { theme, resolvedTheme, toggleTheme } = useTheme()
 
+    // Memoized sections data
+    const sections: Section[] = React.useMemo(() => [
+        { name: "ABOUT", icon: User, id: 0 },
+        { name: "RESUME", icon: FileText, id: 1 },
+        { name: "PROJECTS", icon: Briefcase, id: 2 },
+        { name: "ARTICLES", icon: Edit3, id: 3 },
+        { name: "CONTACT", icon: Mail, id: 4 },
+    ], [])
+
+    const socialLinks: SocialLink[] = React.useMemo(() => [
+        { icon: Github, label: "GitHub", href: "https://github.com/ahm-fahim" },
+        { icon: Linkedin, label: "LinkedIn", href: "https://linkedin.com/in/md-fahim-morshed-5b2126233" },
+    ], [])
+
+    // Responsive check
     useEffect(() => {
         const checkMobile = () => setIsMobile(window.innerWidth < 768)
         checkMobile()
@@ -37,31 +71,78 @@ export function Sidebar({ activeSection, onNavigate }: SidebarProps) {
         return () => window.removeEventListener("resize", checkMobile)
     }, [])
 
-    const sections = [
-        { name: "ABOUT", icon: User, id: 0 },
-        { name: "RESUME", icon: FileText, id: 1 },
-        { name: "PROJECTS", icon: Briefcase, id: 2 },
-        { name: "ARTICLES", icon: Edit3, id: 3 },
-        { name: "CONTACT", icon: Mail, id: 4 },
-    ]
-
-    const handleNavClick = (index: number) => {
+    const handleNavClick = useCallback((index: number) => {
         onNavigate(index)
         setIsDrawerOpen(false)
-    }
+    }, [onNavigate])
 
-    const socialLinks = [
-        { icon: Github, label: "GitHub", href: "https://github.com/ahm-fahim" },
-        { icon: Linkedin, label: "LinkedIn", href: "https://linkedin.com/in/md-fahim-morshed-5b2126233" },
-    ]
+    const toggleDrawer = useCallback(() => {
+        setIsDrawerOpen(prev => !prev)
+    }, [])
+
+    // Navigation Item Component with proper TypeScript
+    const NavItem: React.FC<NavItemProps> = ({ section, isActive, onClick, variant = "desktop" }) => {
+        const Icon = section.icon
+        const baseClasses = "transition-all duration-300"
+
+        if (variant === "mobile-bottom") {
+            return (
+                <button
+                    onClick={() => onClick(section.id)}
+                    className={`flex flex-col items-center justify-center gap-1 ${baseClasses} ${
+                        isActive ? "text-green-600" : "text-muted-foreground"
+                    }`}
+                    title={section.name}
+                >
+                    <Icon className="w-5 h-5" />
+                    <span className="text-xs font-medium">{section.name}</span>
+                </button>
+            )
+        }
+
+        if (variant === "desktop-mini") {
+            return (
+                <button
+                    onClick={() => onClick(section.id)}
+                    className={`flex flex-col items-center gap-2 transition-all duration-300 group relative py-2 px-3 ${
+                        isActive
+                            ? "bg-green-600/20 text-green-600"
+                            : "text-foreground hover:bg-secondary/50"
+                    }`}
+                    title={section.name}
+                >
+                    <Icon className="w-5 h-5" />
+                    <span className="text-xs text-center font-medium">{section.name}</span>
+                    {isActive && (
+                        <div className="absolute -right-[53.2vh] top-1/2 -translate-y-1/2 w-1 h-full bg-green-600"></div>
+                    )}
+                </button>
+            )
+        }
+
+        // Default drawer variant
+        return (
+            <button
+                onClick={() => onClick(section.id)}
+                className={`flex items-center gap-3 px-4 py-3 rounded-lg ${baseClasses} ${
+                    isActive
+                        ? "bg-primary/10 text-primary font-semibold"
+                        : "text-muted-foreground hover:bg-secondary/50"
+                }`}
+            >
+                <Icon className="w-5 h-5" />
+                <span className="font-medium">{section.name}</span>
+            </button>
+        )
+    }
 
     return (
         <>
-            {/* Menu Button - Visible on both desktop and mobile */}
-            <div className="fixed z-40 px-3 py-2 flex items-center justify-between w-full md:hidden">
+            {/* Mobile Header */}
+            <div className="fixed z-40 px-3 py-2 flex items-center justify-between w-full md:hidden bg-card/80 dark:text-white  backdrop-blur-sm">
                 <div>
                     <h1 className="text-[12px] play-bold">Md. Fahim Morshed</h1>
-                    <div className="text-[9px] text-primary">
+                    <div className="text-[9px] text-green-600">
                         <TextType
                             text={["Full Stack Developer"]}
                             typingSpeed={75}
@@ -72,80 +153,57 @@ export function Sidebar({ activeSection, onNavigate }: SidebarProps) {
                     </div>
                 </div>
 
-                <div className="flex items-center gap-4 ">
+                <div className="flex items-center gap-4">
                     <button
                         onClick={toggleTheme}
-                        className="w-full hover:text-primary-foreground flex items-center justify-center gap-2 transition-all duration-300 text-foreground font-medium"
+                        className="hover:text-green-600 transition-all duration-300"
                         title="Toggle theme"
                     >
                         {resolvedTheme === "dark" ? (
-                            <>
-                                <SunIcon className="w-4 h-4" />
-                            </>
+                            <IoPartlySunny className="w-4 h-4" />
                         ) : (
-                            <>
-                                <IoMoonOutline className="w-4 h-4" />
-                            </>
+                            <IoMoonOutline className="w-4 h-4" />
                         )}
                     </button>
                     <button
-                        onClick={() => setIsDrawerOpen(!isDrawerOpen)}
-                        className="hover:text-primary transition-all duration-300 "
+                        onClick={toggleDrawer}
+                        className="hover:text-primary transition-all duration-300"
                         title="Toggle menu"
                     >
                         {isDrawerOpen ? <X className="w-5 h-5" /> : <TextAlignEnd className="w-5 h-5" />}
                     </button>
                 </div>
-
             </div>
 
-            {/* Overlay - Visible on both desktop and mobile */}
+            {/* Overlay */}
             {isDrawerOpen && (
                 <div
-                    className="fixed inset-0 bg-black/50 z-40"
+                    className="fixed inset-0 bg-black/50 z-40 transition-opacity duration-300"
                     onClick={() => setIsDrawerOpen(false)}
                 />
             )}
 
-            {/* Drawer - Visible on both desktop and mobile */}
+            {/* Drawer */}
             <div
-                className={`fixed left-0 top-0 h-screen w-72 bg-card border-r border-border z-40 flex flex-col transition-transform duration-300 ${
+                className={`fixed left-0 top-0 h-screen w-72 dark:bg-black bg-white/95 dark:text-white z-50 flex flex-col transition-transform duration-300 ${
                     isDrawerOpen ? "translate-x-0" : "-translate-x-full"
                 }`}
             >
-                <div className="flex flex-col items-center gap-4 p-6 border-b border-border">
-                    <div className="relative">
-                        <div className="w-20 h-20 rounded-2xl bg-gradient-to-br from-primary to-accent overflow-hidden flex items-center justify-center border-2 border-primary/50">
-                            <User className="w-8 h-8 text-white" />
-                        </div>
-                    </div>
-                    <div className="text-center">
-                        <h3 className="font-bold text-lg text-foreground">MD. Fahim</h3>
-                        <p className="text-sm text-primary font-semibold mt-1">Full Stack Developer</p>
-                    </div>
-                </div>
+
 
                 <nav className="flex flex-col gap-2 p-4 flex-1">
-                    {sections.map((section) => {
-                        const Icon = section.icon
-                        return (
-                            <button
-                                key={section.id}
-                                onClick={() => handleNavClick(section.id)}
-                                className={`flex items-center gap-3 px-4 py-3 rounded-lg transition-all duration-300 ${
-                                    activeSection === section.id
-                                        ? "bg-primary/10 text-primary font-semibold"
-                                        : "text-muted-foreground hover:bg-secondary/50"
-                                }`}
-                            >
-                                <Icon className="w-5 h-5" />
-                                <span className="font-medium">{section.name}</span>
-                            </button>
-                        )
-                    })}
+                    {sections.map((section) => (
+                        <NavItem
+                            key={section.id}
+                            section={section}
+                            isActive={activeSection === section.id}
+                            onClick={handleNavClick}
+                            variant="drawer"
+                        />
+                    ))}
                 </nav>
 
-                <div className="border-t border-border p-4 flex flex-col gap-3">
+                <div className="border-t border-border p-4">
                     <div className="flex gap-2">
                         {socialLinks.map((link) => {
                             const Icon = link.icon
@@ -163,72 +221,51 @@ export function Sidebar({ activeSection, onNavigate }: SidebarProps) {
                             )
                         })}
                     </div>
-
-
                 </div>
             </div>
 
-            {/* Mobile Bottom Navigation - Only visible on mobile */}
+            {/* Mobile Bottom Navigation */}
             {isMobile && (
-                <div className="fixed bottom-0 left-0 right-0 z-50  bg-card md:hidden border-t">
+                <div className="fixed bottom-0 left-0 right-0 z-40 bg-card/80 backdrop-blur-sm dark:text-white dark:border-gray-800 border-gray-100 md:hidden border-t">
                     <div className="flex items-center justify-around h-20 px-4">
-                        {sections.map((section) => {
-                            const Icon = section.icon
-                            return (
-                                <button
-                                    key={section.id}
-                                    onClick={() => handleNavClick(section.id)}
-                                    className={`flex flex-col items-center justify-center gap-1 transition-all duration-300 ${
-                                        activeSection === section.id ? "text-primary" : "text-muted-foreground"
-                                    }`}
-                                    title={section.name}
-                                >
-                                    <Icon className="w-5 h-5" />
-                                    <span className="text-xs font-medium">{section.name}</span>
-                                </button>
-                            )
-                        })}
+                        {sections.map((section) => (
+                            <NavItem
+                                key={section.id}
+                                section={section}
+                                isActive={activeSection === section.id}
+                                onClick={handleNavClick}
+                                variant="mobile-bottom"
+                            />
+                        ))}
                     </div>
                 </div>
             )}
 
-            {/* Desktop Sidebar - Only visible on desktop */}
+            {/* Desktop Sidebar */}
             {!isMobile && (
                 <div className="flex p-2">
                     <div className="h-3/4 my-auto z-30 border-l border-b border-green-600 rounded-[100px]">
-                        <div className="hidden bg-card md:flex h-full my-auto -mr-5 rounded-[100px] m-2 w-24 border flex-col items-center justify-center">
+                        <div className="hidden bg-white dark:bg-black/95 dark:text-white md:flex h-full my-auto -mr-5 rounded-[100px] m-2 w-24 border border-gray-100 dark:border-gray-800 flex-col items-center justify-center">
                             <div className="flex flex-col items-center justify-center gap-6 w-full">
                                 <div>
                                     <button
-                                        onClick={() => setIsDrawerOpen(!isDrawerOpen)}
-                                        className=" hover:text-primary transition-all duration-300"
+                                        onClick={toggleDrawer}
+                                        className="hover:text-primary transition-all duration-300"
                                         title="Toggle menu"
                                     >
                                         {isDrawerOpen ? <X className="w-5 h-5" /> : <TextAlignStart className="w-5 h-5" />}
                                     </button>
                                 </div>
                                 <nav className="flex flex-col w-full">
-                                    {sections.map((section) => {
-                                        const Icon = section.icon
-                                        return (
-                                            <button
-                                                key={section.id}
-                                                onClick={() => handleNavClick(section.id)}
-                                                className={`flex flex-col items-center gap-2 transition-all duration-300 group relative py-2 px-3 ${
-                                                    activeSection === section.id
-                                                        ? "bg-primary/10 text-primary"
-                                                        : "text-foreground hover:bg-secondary/50"
-                                                }`}
-                                                title={section.name}
-                                            >
-                                                <Icon className="w-5 h-5" />
-                                                <span className="text-xs text-center font-medium">{section.name}</span>
-                                                {activeSection === section.id && (
-                                                    <div className="absolute -right-[53.2vh] top-1/2 -translate-y-1/2 w-1 h-full bg-primary"></div>
-                                                )}
-                                            </button>
-                                        )
-                                    })}
+                                    {sections.map((section) => (
+                                        <NavItem
+                                            key={section.id}
+                                            section={section}
+                                            isActive={activeSection === section.id}
+                                            onClick={handleNavClick}
+                                            variant="desktop-mini"
+                                        />
+                                    ))}
                                 </nav>
                                 <button
                                     onClick={toggleTheme}
@@ -236,7 +273,7 @@ export function Sidebar({ activeSection, onNavigate }: SidebarProps) {
                                     title="Toggle theme"
                                 >
                                     {resolvedTheme === "dark" ? (
-                                        <Sun className="w-6 h-6" />
+                                        <IoPartlySunny className="w-6 h-6" />
                                     ) : (
                                         <IoMoonOutline className="w-6 h-6" />
                                     )}
@@ -244,7 +281,7 @@ export function Sidebar({ activeSection, onNavigate }: SidebarProps) {
                             </div>
                         </div>
                     </div>
-                    <Me/>
+                    <Me />
                 </div>
             )}
         </>

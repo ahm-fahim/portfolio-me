@@ -1,6 +1,7 @@
+// app/page.tsx
 "use client"
 
-import { useEffect, useRef, useState, useCallback } from "react"
+import { useEffect, useRef, useState, useCallback, RefObject } from "react"
 import { Sidebar } from "@/components/sidebar"
 import { AboutSection } from "@/components/about-section"
 import { ResumeSection } from "@/components/resume-section"
@@ -8,9 +9,16 @@ import { ProjectsSection } from "@/components/projects-section"
 import { ArticlesSection } from "@/components/articles-section"
 import { ContactSection } from "@/components/contact-section"
 
+interface VantaEffect {
+    setOptions: (options: unknown) => void
+    destroy: () => void
+}
+
 declare global {
     interface Window {
-        VANTA: any;
+        VANTA: {
+            GLOBE: (options: unknown) => VantaEffect
+        }
     }
 }
 
@@ -19,8 +27,10 @@ export default function Home() {
     const vantaRef = useRef<HTMLDivElement>(null)
     const [activeSection, setActiveSection] = useState(0)
     const [currentTheme, setCurrentTheme] = useState<'light' | 'dark'>('light')
-    const vantaEffectRef = useRef<any>(null)
+    const [isVantaReady, setIsVantaReady] = useState(false)
+    const vantaEffectRef = useRef<VantaEffect | null>(null)
 
+    // Memoized sections
     const sections = [
         { component: <AboutSection key="about" />, title: "About" },
         { component: <ResumeSection key="resume" />, title: "Resume" },
@@ -29,33 +39,7 @@ export default function Home() {
         { component: <ContactSection key="contact" />, title: "Get in Touch" },
     ]
 
-    // Detect theme changes from your existing theme system
-    useEffect(() => {
-        const updateTheme = () => {
-            const isDark = document.documentElement.classList.contains('dark')
-            setCurrentTheme(isDark ? 'dark' : 'light')
-        }
-
-        // Initial theme detection
-        updateTheme()
-
-        // Observe theme changes
-        const observer = new MutationObserver((mutations) => {
-            mutations.forEach((mutation) => {
-                if (mutation.attributeName === 'class') {
-                    updateTheme()
-                }
-            })
-        })
-
-        observer.observe(document.documentElement, {
-            attributes: true,
-            attributeFilter: ['class']
-        })
-
-        return () => observer.disconnect()
-    }, [])
-
+    // Smooth navigation
     const handleNavigate = useCallback((index: number) => {
         if (containerRef.current) {
             const targetScroll = index * window.innerHeight
@@ -66,6 +50,7 @@ export default function Home() {
         }
     }, [])
 
+    // Scroll handling
     useEffect(() => {
         const container = containerRef.current
         if (!container) return
@@ -76,84 +61,146 @@ export default function Home() {
             setActiveSection(Math.min(newActive, sections.length - 1))
         }
 
-        container.addEventListener("scroll", handleScroll)
+        container.addEventListener("scroll", handleScroll, { passive: true })
         return () => container.removeEventListener("scroll", handleScroll)
     }, [sections.length])
 
-    // Initialize and update VANTA.GLOBE effect based on theme
+    // Theme detection
     useEffect(() => {
-        const loadScript = (src: string): Promise<void> => {
-            return new Promise((resolve, reject) => {
-                if (document.querySelector(`script[src="${src}"]`)) {
-                    resolve();
-                    return;
+        const updateTheme = () => {
+            const isDark = document.documentElement.classList.contains('dark')
+            setCurrentTheme(isDark ? 'dark' : 'light')
+        }
+
+        // Initial theme detection
+        updateTheme()
+
+        const observer = new MutationObserver((mutations) => {
+            for (const mutation of mutations) {
+                if (mutation.attributeName === 'class') {
+                    updateTheme()
+                    break
                 }
-                const script = document.createElement('script');
-                script.src = src;
-                script.onload = () => resolve();
-                script.onerror = () => reject(new Error(`Failed to load script: ${src}`));
-                document.head.appendChild(script);
-            });
-        };
+            }
+        })
 
-        let vantaEffect: any = null;
+        observer.observe(document.documentElement, {
+            attributes: true,
+            attributeFilter: ['class']
+        })
 
-        const initVanta = async () => {
-            if (!vantaRef.current) return;
+        return () => observer.disconnect()
+    }, [])
+
+    // Utility functions
+    const loadScript = (src: string): Promise<void> => {
+        return new Promise((resolve, reject) => {
+            if (document.querySelector(`script[src="${src}"]`)) {
+                resolve()
+                return
+            }
+            const script = document.createElement('script')
+            script.src = src
+            script.onload = () => resolve()
+            script.onerror = () => reject(new Error(`Failed to load: ${src}`))
+            document.head.appendChild(script)
+        })
+    }
+
+    const initializeVantaEffect = () => {
+        if (!vantaRef.current || vantaEffectRef.current) return
+
+        const isDark = currentTheme === 'dark'
+
+        if (window.VANTA) {
+            vantaEffectRef.current = window.VANTA.GLOBE({
+                el: vantaRef.current,
+                mouseControls: true,
+                touchControls: true,
+                gyroControls: false,
+                minHeight: 200.00,
+                minWidth: 200.00,
+                scale: 1.00,
+                scaleMobile: 1.00,
+                color: isDark ? 0xa400 : 0xa400,
+                color2: isDark ? 0x90bb8e : 0x90bb8e,
+                size: 1.50,
+                backgroundColor: isDark ? 0x000000 : 0xffffff,
+                backgroundAlpha: isDark ? 1.0 : 0.8
+            })
+        }
+    }
+
+    const updateVantaColors = () => {
+        if (!vantaEffectRef.current) return
+
+        const isDark = currentTheme === 'dark'
+
+        vantaEffectRef.current.setOptions({
+            color: isDark ? 0xa400 : 0xa400,
+            color2: isDark ? 0x90bb8e : 0x90bb8e,
+            backgroundColor: isDark ? 0x000000 : 0xffffff,
+            backgroundAlpha: isDark ? 1.0 : 0.8
+        })
+    }
+
+    const cleanupVanta = () => {
+        if (vantaEffectRef.current) {
+            try {
+                vantaEffectRef.current.destroy()
+            } catch (error) {
+                console.warn('Error cleaning up Vanta:', error)
+            }
+            vantaEffectRef.current = null
+        }
+    }
+
+    // Load VANTA scripts efficiently
+    useEffect(() => {
+        let mounted = true
+
+        const loadVanta = async (): Promise<void> => {
+            if (!vantaRef.current || !mounted) return
 
             try {
-                // Load Three.js and Vanta scripts
-                await loadScript('https://cdnjs.cloudflare.com/ajax/libs/three.js/r134/three.min.js');
-                await loadScript('https://cdn.jsdelivr.net/npm/vanta@latest/dist/vanta.globe.min.js');
+                if (!window.VANTA) {
+                    await Promise.all([
+                        loadScript('https://cdnjs.cloudflare.com/ajax/libs/three.js/r134/three.min.js'),
+                        loadScript('https://cdn.jsdelivr.net/npm/vanta@latest/dist/vanta.globe.min.js')
+                    ])
+                }
 
-                // Wait for scripts to initialize
-                await new Promise(resolve => setTimeout(resolve, 100));
-
-                if (window.VANTA && vantaRef.current) {
-                    // Destroy existing effect
-                    if (vantaEffectRef.current) {
-                        vantaEffectRef.current.destroy();
-                    }
-
-                    // Theme-based configuration
-                    const isDark = currentTheme === 'dark';
-
-                    vantaEffect = window.VANTA.GLOBE({
-                        el: vantaRef.current,
-                        mouseControls: true,
-                        touchControls: true,
-                        gyroControls: false,
-                        minHeight: 200.00,
-                        minWidth: 200.00,
-                        scale: 1.00,
-                        scaleMobile: 1.00,
-                        color: isDark ? 0xa400 : 0xa400, // Purple for dark, green for light
-                        color2: isDark ? 0x90bb8e : 0x90bb8e, // Dark purple for dark, light green for light
-                        size: 1.50,
-                        backgroundColor: isDark ? 0x0a0a0a : 0xffffff // Dark background for dark, white for light
-                    });
-
-                    vantaEffectRef.current = vantaEffect;
+                if (mounted && window.VANTA && vantaRef.current) {
+                    initializeVantaEffect()
+                    setIsVantaReady(true)
                 }
             } catch (error) {
-                console.error('Error initializing Vanta effect:', error);
+                console.warn('Vanta effect loading failed:', error)
+                setIsVantaReady(true)
             }
-        };
+        }
 
-        initVanta();
+        loadVanta()
 
         return () => {
-            if (vantaEffectRef.current) {
-                vantaEffectRef.current.destroy();
-            }
-        };
-    }, [currentTheme]); // Re-initialize when theme changes
+            mounted = false
+            cleanupVanta()
+        }
+    }, [])
+
+    // Update VANTA colors on theme change
+    useEffect(() => {
+        if (isVantaReady && vantaEffectRef.current) {
+            updateVantaColors()
+        }
+    }, [currentTheme, isVantaReady])
 
     return (
         <div className="flex h-screen play-regular relative" style={{ width: '100vw', height: '100vh', overflow: 'hidden' }}>
-            {/* VANTA.GLOBE as full background */}
+            {/* VANTA Background with solid black in dark mode */}
             <div
                 ref={vantaRef}
+                className="transition-colors duration-500"
                 style={{
                     position: 'absolute',
                     top: 0,
@@ -164,18 +211,25 @@ export default function Home() {
                 }}
             />
 
-            {/* Content with higher z-index */}
-            <div style={{ position: 'relative', zIndex: 1, width: '100%', height: '100%', display: 'flex' }}>
-                {/* Sidebar with Profile */}
+            {/* Content Layer */}
+            <div style={{
+                position: 'relative',
+                zIndex: 1,
+                width: '100%',
+                height: '100%',
+                display: 'flex'
+            }}>
                 <Sidebar activeSection={activeSection} onNavigate={handleNavigate} />
 
-                {/* Main content */}
+                {/* Main Content with fully dark background in dark mode */}
                 <div
                     ref={containerRef}
-                    className="flex-1 overflow-y-scroll md:border md:rounded-4xl md:h-[90vh] md:my-auto scroll-snap-container my-0 md:mr-10"
+                    className="flex-1 overflow-y-scroll md:border border-gray-200 dark:text-white dark:border-gray-800 md:rounded-4xl md:h-[90vh] md:my-auto scroll-snap-container my-0 md:mr-10 transition-all duration-500"
                     style={{
-                        backgroundColor: currentTheme === 'dark' ? 'rgba(10,10,10,0.35)' : 'rgba(255,255,255,0.38)',
-                        backdropFilter: 'blur(1px)'
+                        backgroundColor: currentTheme === 'dark'
+                            ? 'rgba(0,0,0,0.29)'
+                            : 'rgba(255,255,255,0.25)',
+                        backdropFilter: currentTheme === 'dark' ? 'blur(1px)' : 'blur(1px)'
                     }}
                 >
                     {sections.map((section, idx) => (
