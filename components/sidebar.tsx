@@ -1,7 +1,7 @@
 // components/sidebar.tsx
 "use client"
 
-import { useState, useEffect } from "react"
+import React, { useState, useEffect } from "react"
 import {
     Github,
     Linkedin,
@@ -18,6 +18,7 @@ import {
 import { useTheme } from "./theme-provider"
 import Me from "@/components/Me";
 import { IoMoonOutline } from "react-icons/io5";
+import TextType from "@/components/TextType";
 
 interface SidebarProps {
     activeSection: number
@@ -60,7 +61,15 @@ export function Sidebar({ activeSection, onNavigate }: SidebarProps) {
             <div className="fixed z-40 px-3 py-2 flex items-center justify-between w-full md:hidden">
                 <div>
                     <h1 className="text-[12px] play-bold">Md. Fahim Morshed</h1>
-                    <p className="text-[9px] text-primary">Full Stack Developer</p>
+                    <div className="text-[9px] text-primary">
+                        <TextType
+                            text={["Full Stack Developer"]}
+                            typingSpeed={75}
+                            pauseDuration={1500}
+                            showCursor={true}
+                            cursorCharacter="|"
+                        />
+                    </div>
                 </div>
 
                 <div className="flex items-center gap-4 ">

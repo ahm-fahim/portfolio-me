@@ -3,7 +3,7 @@ import React from 'react';
 import Image from "next/image";
 import img from "@/public/me.jpg";
 import {CloudDownload, GithubIcon, LinkedinIcon, Phone} from "lucide-react";
-
+import TextType from '@/components/TextType';
 
 export default function Me() {
     return (
@@ -28,8 +28,14 @@ export default function Me() {
             <div className="bg-gray-800/80 backdrop-blur-lg">
                 <div className="p-6 flex flex-col items-center flex-grow">
                     <h1 className="text-3xl play-bold tracking-wide pt-4">Md. Fahim Morshed</h1>
-                    <div className="flex items-center space-x-2 mb-8">
-                        <h3 className="text-xl text-green-400 font-medium">Full Stack Developer</h3>
+                    <div className="flex items-center space-x-2 mb-8 text-xl text-green-400 font-medium">
+                        <TextType
+                            text={["Full Stack Developer"]}
+                            typingSpeed={75}
+                            pauseDuration={1500}
+                            showCursor={true}
+                            cursorCharacter="|"
+                        />
                     </div>
 
 
