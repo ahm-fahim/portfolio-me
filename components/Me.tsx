@@ -4,12 +4,15 @@ import Image from "next/image";
 import img from "@/public/me.jpg";
 import {CloudDownload, GithubIcon, LinkedinIcon, Phone} from "lucide-react";
 import TextType from '@/components/TextType';
+import SplashCursor from "@/components/SplashCursor";
 
 export default function Me() {
     return (
 
         <div
             className="trapezoid h-[85vh] w-[55vh] mx-auto my-auto text-white overflow-hidden flex flex-col">
+
+            <SplashCursor/>
 
             <div className="relative w-full aspect-[4/5] h-full overflow-hidden">
 
