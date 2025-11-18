@@ -172,7 +172,7 @@ export default function Home() {
                 {/* Main content */}
                 <div
                     ref={containerRef}
-                    className="flex-1 overflow-y-scroll md:border md:rounded-4xl md:h-[90vh] md:my-auto scroll-snap-container my-20 md:mr-10"
+                    className="flex-1 overflow-y-scroll md:border md:rounded-4xl md:h-[90vh] md:my-auto scroll-snap-container my-0 md:mr-10"
                     style={{
                         backgroundColor: currentTheme === 'dark' ? 'rgba(10,10,10,0.35)' : 'rgba(255,255,255,0.38)',
                         backdropFilter: 'blur(1px)'

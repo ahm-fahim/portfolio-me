@@ -25,7 +25,7 @@ export default function Me() {
             </div>
 
 
-            <div className="bg-gray-800/90 backdrop-blur-lg">
+            <div className="bg-gray-800/80 backdrop-blur-lg">
                 <div className="p-6 flex flex-col items-center flex-grow">
                     <h1 className="text-3xl play-bold tracking-wide pt-4">Md. Fahim Morshed</h1>
                     <div className="flex items-center space-x-2 mb-8">
