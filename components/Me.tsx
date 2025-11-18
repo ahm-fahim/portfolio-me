@@ -20,6 +20,8 @@ export default function Me() {
                     layout="fill"
                     objectFit="cover"
                 />
+
+
             </div>
 
 
@@ -45,13 +47,13 @@ export default function Me() {
                     <button
                         className="flex-1 py-4 flex items-center justify-center space-x-2 text-white hover:bg-gray-800 transition duration-200">
                         <span>DOWNLOAD CV</span>
-                        <CloudDownload />
+                        <CloudDownload/>
                     </button>
 
                     <button
                         className="flex-1 py-4 flex items-center justify-center space-x-2 border-l border-gray-600 text-white hover:bg-gray-800 transition duration-200">
                         <span>CONTACT ME</span>
-                        <Phone />
+                        <Phone/>
                     </button>
                 </div>
             </div>
