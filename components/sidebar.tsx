@@ -13,10 +13,11 @@ import {
     FileText,
     Briefcase,
     Edit3,
-    Mail, TextAlignStart, TextAlignEnd
+    Mail, TextAlignStart, TextAlignEnd, MoonIcon, SunIcon
 } from 'lucide-react'
 import { useTheme } from "./theme-provider"
 import Me from "@/components/Me";
+import { IoMoonOutline } from "react-icons/io5";
 
 interface SidebarProps {
     activeSection: number
@@ -56,13 +57,38 @@ export function Sidebar({ activeSection, onNavigate }: SidebarProps) {
     return (
         <>
             {/* Menu Button - Visible on both desktop and mobile */}
-            <button
-                onClick={() => setIsDrawerOpen(!isDrawerOpen)}
-                className="fixed top-4 right-4 z-50 p-2  hover:bg-primary hover:text-primary-foreground transition-all duration-300 md:hidden"
-                title="Toggle menu"
-            >
-                {isDrawerOpen ? <X className="w-5 h-5" /> : <TextAlignEnd className="w-5 h-5" />}
-            </button>
+            <div className="fixed z-40 px-3 py-2 flex items-center justify-between w-full md:hidden">
+                <div>
+                    <h1 className="text-[12px] play-bold">Md. Fahim Morshed</h1>
+                    <p className="text-[9px] text-primary">Full Stack Developer</p>
+                </div>
+
+                <div className="flex items-center gap-4 ">
+                    <button
+                        onClick={toggleTheme}
+                        className="w-full hover:text-primary-foreground flex items-center justify-center gap-2 transition-all duration-300 text-foreground font-medium"
+                        title="Toggle theme"
+                    >
+                        {resolvedTheme === "dark" ? (
+                            <>
+                                <SunIcon className="w-4 h-4" />
+                            </>
+                        ) : (
+                            <>
+                                <IoMoonOutline className="w-4 h-4" />
+                            </>
+                        )}
+                    </button>
+                    <button
+                        onClick={() => setIsDrawerOpen(!isDrawerOpen)}
+                        className="hover:text-primary transition-all duration-300 "
+                        title="Toggle menu"
+                    >
+                        {isDrawerOpen ? <X className="w-5 h-5" /> : <TextAlignEnd className="w-5 h-5" />}
+                    </button>
+                </div>
+
+            </div>
 
             {/* Overlay - Visible on both desktop and mobile */}
             {isDrawerOpen && (
@@ -129,31 +155,7 @@ export function Sidebar({ activeSection, onNavigate }: SidebarProps) {
                         })}
                     </div>
 
-                    <button
-                        onClick={toggleTheme}
-                        className="w-full h-10 rounded-lg bg-secondary hover:bg-primary hover:text-primary-foreground flex items-center justify-center gap-2 transition-all duration-300 text-foreground font-medium"
-                        title="Toggle theme"
-                    >
-                        {resolvedTheme === "dark" ? (
-                            <>
-                                <Sun className="w-4 h-4" />
-                                <span className="text-sm">Light Mode</span>
-                            </>
-                        ) : (
-                            <>
-                                <Moon className="w-4 h-4" />
-                                <span className="text-sm">Dark Mode</span>
-                            </>
-                        )}
-                    </button>
 
-                    <a
-                        href="/cv.pdf"
-                        download
-                        className="w-full px-4 py-2 rounded-lg bg-primary text-primary-foreground font-semibold hover:bg-primary/90 transition-all duration-300 text-center"
-                    >
-                        Download CV
-                    </a>
                 </div>
             </div>
 
@@ -227,7 +229,7 @@ export function Sidebar({ activeSection, onNavigate }: SidebarProps) {
                                     {resolvedTheme === "dark" ? (
                                         <Sun className="w-6 h-6" />
                                     ) : (
-                                        <Moon className="w-6 h-6" />
+                                        <IoMoonOutline className="w-6 h-6" />
                                     )}
                                 </button>
                             </div>

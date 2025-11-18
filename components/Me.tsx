@@ -2,7 +2,7 @@
 import React from 'react';
 import Image from "next/image";
 import img from "@/public/me.jpg";
-import {GithubIcon, LinkedinIcon} from "lucide-react";
+import {CloudDownload, GithubIcon, LinkedinIcon, Phone} from "lucide-react";
 
 
 export default function Me() {
@@ -25,7 +25,7 @@ export default function Me() {
 
             <div className="bg-gray-800/90 backdrop-blur-lg">
                 <div className="p-6 flex flex-col items-center flex-grow">
-                    <h1 className="text-3xl font-extrabold tracking-wide pt-4">Md. Fahim Morshed</h1>
+                    <h1 className="text-3xl play-bold tracking-wide pt-4">Md. Fahim Morshed</h1>
                     <div className="flex items-center space-x-2 mb-8">
                         <h3 className="text-xl text-green-400 font-medium">Full Stack Developer</h3>
                     </div>
@@ -41,17 +41,17 @@ export default function Me() {
                         </a>
                     </div>
                 </div>
-                <div className="flex border-t border-gray-600 w-full text-center text-lg font-semibold pb-10 ">
+                <div className="flex border-t border-gray-600 w-full text-center text-md font-semibold pb-10 ">
                     <button
                         className="flex-1 py-4 flex items-center justify-center space-x-2 text-white hover:bg-gray-800 transition duration-200">
-                        <i className="fas fa-cloud-download-alt"></i>
                         <span>DOWNLOAD CV</span>
+                        <CloudDownload />
                     </button>
 
                     <button
                         className="flex-1 py-4 flex items-center justify-center space-x-2 border-l border-gray-600 text-white hover:bg-gray-800 transition duration-200">
-                        <i className="fas fa-phone-alt"></i>
                         <span>CONTACT ME</span>
+                        <Phone />
                     </button>
                 </div>
             </div>

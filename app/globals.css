@@ -1,4 +1,19 @@
+@import url('https://fonts.googleapis.com/css2?family=Play:wght@400;700&display=swap');
 @import "tailwindcss";
+
+
+.play-regular {
+    font-family: "Play", sans-serif;
+    font-weight: 400;
+    font-style: normal;
+}
+
+.play-bold {
+    font-family: "Play", sans-serif;
+    font-weight: 700;
+    font-style: normal;
+}
+
 
 /* Light theme (default) */
 :root {
@@ -164,3 +179,5 @@
     --p: 40px; /* control the shape (can be percentage) */
     clip-path: polygon(100% var(--p),100% calc(100% - var(--p)),0 100%,0 0);
 }
+
+

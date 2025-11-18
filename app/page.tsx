@@ -46,7 +46,7 @@ export default function Home() {
     }, [sections.length])
 
     return (
-        <div className="flex h-screen bg-background">
+        <div className="flex h-screen bg-background play-regular">
             {/* Sidebar with Profile */}
             <Sidebar activeSection={activeSection} onNavigate={handleNavigate} />
             {/* Main content */}
