@@ -80,7 +80,7 @@ export function ProjectsSection() {
             <div>
                 <div className="lg:col-span-2 space-y-8 animate-fade-in">
                     <section>
-                        <div className="flex items-center justify-between bg-white/80 border-b rounded-t-lg py-4 mb-5 p-2 ">
+                        <div className="flex items-center justify-between bg-white/80 dark:bg-gray-800/50 border-b rounded-t-lg py-4 mb-5 p-2 ">
                             <div className="flex items-center justify-between flex-wrap gap-6">
                                 <div className="flex items-center gap-3">
                                     <div className="w-2 h-2 rounded-full bg-accent"></div>
