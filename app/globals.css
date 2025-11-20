@@ -267,12 +267,12 @@
     justify-content: center;
     position: relative;
     overflow: hidden;
-    transition: transform 0.3s ease, opacity 0.3s ease;
+    transition: transform 3s ease, opacity 3s ease;
 }
 
 /* Smooth section transitions */
 .scroll-snap-section:not(:target) {
-    animation: fade-in-up 0.8s ease-out both;
+    animation: fade-in-up 3s ease-out both;
 }
 
 /* Enhanced pattern background */
