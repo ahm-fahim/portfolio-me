@@ -36,3 +36,7 @@ The easiest way to deploy your Next.js app is to use the [Vercel Platform](https
 Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
 # portfolio-me
 # portfolio-me
+
+
+## Background animation library - 
+[Vanta.js](https://www.vantajs.com/?effect=globe#(backgroundAlpha:1,backgroundColor:16777215,color:41984,color2:9485198,gyroControls:!f,maxDistance:20,minHeight:200,minWidth:200,mouseControls:!t,points:10,scale:1,scaleMobile:1,showDots:!t,size:1.5,spacing:15,touchControls:!t))
