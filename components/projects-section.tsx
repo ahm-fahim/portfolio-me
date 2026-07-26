@@ -19,48 +19,12 @@ export function ProjectsSection() {
         },
         {
             id: 2,
-            title: "Portfolio",
+            title: "Portfolio Me",
             category: "landing",
-            image: "/assets/portfolio1.png",
+            image: "/assets/portfolio2.png",
             description: "High-quality landing page showcasing QA testing services and features.",
             tech: ["Next.js", "Tailwind CSS",],
-            link: "https://qaunlocked.com/",
-        },
-        {
-            id: 3,
-            title: "Family Star E-Store",
-            category: "ecommerce",
-            image: "/ecommerce-store.jpg",
-            description: "Full e-commerce platform with product management and integrated checkout.",
-            tech: ["Next.js", "Stripe", "PostgreSQL", "Tailwind"],
-            link: "https://cuddlecrafter.com/",
-        },
-        {
-            id: 4,
-            title: "Family Star E-Garments",
-            category: "ecommerce",
-            image: "/placeholder-89j64.png",
-            description: "E-commerce platform for garments with inventory and order management.",
-            tech: ["Next.js", "PostgreSQL", "Tailwind"],
-            link: "https://almodinagarments.com/",
-        },
-        {
-            id: 5,
-            title: "News Paper",
-            category: "content",
-            image: "/news-blog-platform.jpg",
-            description: "News and blog platform with dynamic CMS and content management.",
-            tech: ["Next.js", "CMS", "Tailwind"],
-            link: "https://irishbanglatimes.com/",
-        },
-        {
-            id: 6,
-            title: "Admin Dashboard",
-            category: "dashboard",
-            image: "/admin-dashboard-analytics.jpg",
-            description: "Advanced admin panel with data visualization and CRUD operations.",
-            tech: ["Next.js", "Recharts", "PostgreSQL"],
-            link: "#",
+            link: "https://rococo-praline-337a91.netlify.app/",
         },
     ]
 
@@ -124,7 +88,7 @@ export function ProjectsSection() {
 
                                     <div className="p-4">
                                         <div className="flex items-start justify-between mb-2 gap-2">
-                                            <h3 className="font-bold text-lg group-hover:text-accent transition-colors line-clamp-2">
+                                            <h3 className="font-bold text-lg group-hover:text-green-500 transition-colors line-clamp-2">
                                                 {project.title}
                                             </h3>
                                             {project.link !== "#" && (

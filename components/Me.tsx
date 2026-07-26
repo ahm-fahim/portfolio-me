@@ -44,10 +44,10 @@ export default function Me() {
 
                     {/* Social Icons */}
                     <div className="flex justify-center space-x-6 mb-auto text-2xl text-gray-400">
-                        <a href="#" className="hover:text-white transition duration-200">
+                        <a href="https://github.com/ahm-fahim" target='_blank' className="hover:text-white transition duration-200">
                             <GithubIcon className="h-6 w-6"/>
                         </a>
-                        <a href="#" className="hover:text-white transition duration-200">
+                        <a href="https://www.linkedin.com/in/md-fahim-morshed-5b2126233/" target='_blank' className="hover:text-white transition duration-200">
                             <LinkedinIcon className="h-6 w-6 "/>
                         </a>
                     </div>
