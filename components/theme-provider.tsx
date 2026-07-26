@@ -4,6 +4,7 @@
 import React, { createContext, useContext, useEffect, useState, useMemo, useCallback } from "react"
 
 type Theme = "light" | "dark" | "system"
+
 type ThemeContextType = {
     theme: Theme
     setTheme: (theme: Theme) => void
@@ -21,124 +22,95 @@ const ThemeContext = createContext<ThemeContextType | undefined>(undefined)
 
 export const useTheme = () => {
     const context = useContext(ThemeContext)
-    if (context === undefined) {
+    if (!context) {
         throw new Error("useTheme must be used within a ThemeProvider")
     }
     return context
 }
 
 export function ThemeProvider({
-                                  children,
-                                  defaultTheme = "system",
-                                  storageKey = "app-theme",
-                              }: ThemeProviderProps) {
-    // Initialize mounted as true by default, we'll handle the initial render differently
-    const [isInitialized, setIsInitialized] = useState(false)
+    children,
+    defaultTheme = "system",
+    storageKey = "app-theme",
+}: ThemeProviderProps) {
+    const [mounted, setMounted] = useState(false)
     const [theme, setThemeState] = useState<Theme>(() => {
-        // Initialize state with value from localStorage
-        if (typeof window === 'undefined') return defaultTheme
-
+        if (typeof window === "undefined") return defaultTheme
         try {
-            const savedTheme = localStorage.getItem(storageKey) as Theme | null
-            return savedTheme || defaultTheme
+            return (localStorage.getItem(storageKey) as Theme) || defaultTheme
         } catch {
             return defaultTheme
         }
     })
 
+    // Helper to get system color scheme preference
     const getSystemTheme = (): "light" | "dark" => {
-        if (typeof window === 'undefined') return 'light'
+        if (typeof window === "undefined") return "light"
         return window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light"
     }
 
-    const getResolvedTheme = useCallback((): "light" | "dark" => {
-        if (theme === "system") {
-            return getSystemTheme()
-        }
-        return theme
+    // Resolve active theme ("light" or "dark")
+    const resolvedTheme = useMemo<"light" | "dark">(() => {
+        return theme === "system" ? getSystemTheme() : theme
     }, [theme])
 
-    // Handle initial theme application after mount
+    // Update DOM class name whenever theme changes
     useEffect(() => {
-        // This runs only once after the component mounts
-        const applyInitialTheme = () => {
-            const root = document.documentElement
-            const resolved = getResolvedTheme()
-
-            root.classList.remove("light", "dark")
-            root.classList.add(resolved)
-
-            // Update meta theme-color
-            const metaThemeColor = document.querySelector("meta[name='theme-color']")
-            if (metaThemeColor) {
-                metaThemeColor.setAttribute("content", resolved === "dark" ? "#0f172a" : "#f8f9fa")
-            }
-
-            setIsInitialized(true)
-        }
-
-        applyInitialTheme()
-    }, []) // Empty dependency array - runs once on mount
-
-    // Apply theme class when theme changes (after initial mount)
-    useEffect(() => {
-        if (!isInitialized) return
-
         const root = document.documentElement
-        const resolved = getResolvedTheme()
+        const targetTheme = theme === "system" ? getSystemTheme() : theme
 
         root.classList.remove("light", "dark")
-        root.classList.add(resolved)
+        root.classList.add(targetTheme)
+        setMounted(true)
+    }, [theme])
 
-        // Update meta theme-color
-        const metaThemeColor = document.querySelector("meta[name='theme-color']")
-        if (metaThemeColor) {
-            metaThemeColor.setAttribute("content", resolved === "dark" ? "#0f172a" : "#f8f9fa")
-        }
-    }, [theme, isInitialized, getResolvedTheme])
-
-    // Listen for system theme changes
+    // Listen for OS system theme changes when set to "system"
     useEffect(() => {
-        if (!isInitialized || theme !== "system") return
+        if (theme !== "system") return
 
         const mediaQuery = window.matchMedia("(prefers-color-scheme: dark)")
-
         const handleChange = () => {
             const root = document.documentElement
-            const resolved = getSystemTheme()
             root.classList.remove("light", "dark")
-            root.classList.add(resolved)
+            root.classList.add(getSystemTheme())
         }
 
         mediaQuery.addEventListener("change", handleChange)
         return () => mediaQuery.removeEventListener("change", handleChange)
-    }, [theme, isInitialized])
+    }, [theme])
 
-    const setTheme = useCallback((newTheme: Theme) => {
-        setThemeState(newTheme)
-        try {
-            localStorage.setItem(storageKey, newTheme)
-        } catch (error) {
-            console.warn("Could not save theme to localStorage:", error)
-        }
-    }, [storageKey])
+    const setTheme = useCallback(
+        (newTheme: Theme) => {
+            setThemeState(newTheme)
+            try {
+                localStorage.setItem(storageKey, newTheme)
+            } catch (error) {
+                console.warn("Could not save theme to localStorage:", error)
+            }
+        },
+        [storageKey]
+    )
 
+    // Toggles based on resolved theme (works intuitively even in 'system' mode)
     const toggleTheme = useCallback(() => {
-        setTheme(theme === "dark" ? "light" : "dark")
-    }, [theme, setTheme])
+        setTheme(resolvedTheme === "dark" ? "light" : "dark")
+    }, [resolvedTheme, setTheme])
 
-    const contextValue = useMemo(() => ({
-        theme,
-        setTheme,
-        resolvedTheme: getResolvedTheme(),
-        toggleTheme,
-    }), [theme, setTheme, getResolvedTheme, toggleTheme])
+    const contextValue = useMemo(
+        () => ({
+            theme,
+            setTheme,
+            resolvedTheme,
+            toggleTheme,
+        }),
+        [theme, setTheme, resolvedTheme, toggleTheme]
+    )
 
-    // Prevent hydration mismatch - show nothing until initialized
-    if (!isInitialized) {
+    // Hide children briefly before mount to prevent hydration mismatch flashes
+    if (!mounted) {
         return (
             <ThemeContext.Provider value={contextValue}>
-                <div style={{ visibility: 'hidden' }}>{children}</div>
+                <div style={{ visibility: "hidden" }}>{children}</div>
             </ThemeContext.Provider>
         )
     }

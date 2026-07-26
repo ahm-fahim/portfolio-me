@@ -36,9 +36,7 @@ export function AboutSection() {
                         <h2 className="bg-green-600 p-2">Language: </h2>
                         <div className="grid grid-cols-4 gap-4 text-2xl ">
                             <FaJs/>
-                            <TbBrandCpp/>
-                            <FaPython/>
-                            <SiPhp/>
+                            <TbBrandCpp />
                         </div>
                     </div>
                     <div className="flex justify-between items-center pb-4">
@@ -48,7 +46,6 @@ export function AboutSection() {
                             <SiNextdotjs className="bg-green-100 p-2 rounded-md"/>
                             <RiTailwindCssFill className="bg-green-100 p-2 rounded-md"/>
                             <FaNode className="bg-green-100 p-2 rounded-md"/>
-                            <SiNestjs className="bg-green-100 p-2 rounded-md"/>
                             <SiMongodb className="bg-green-100 p-2 rounded-md"/>
                             <BiLogoPostgresql className="bg-green-100 p-2 rounded-md"/>
                             <SiMysql className="bg-green-100 p-2 rounded-md"/>

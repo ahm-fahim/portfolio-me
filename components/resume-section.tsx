@@ -7,15 +7,15 @@ export function ResumeSection() {
     const professionalExperience = [
         {
             title: "FULL STACK DEVELOPER",
-            company: "Pintag",
+            company: "Pintag, US",
             location: "Remote",
-            period: "January 2025 – Present",
+            period: "January 2025 – October 2025",
         },
         {
             title: "WEB DESIGNER TRAINER",
-            company: "Bogura Zubo Unnoyon Club",
-            location: "",
-            period: "November 2022",
+            company: "Department Of  Youth Development, Bogura",
+            location: "Bogura",
+            period: "November 2022 - December 2022 ",
         },
     ];
 
@@ -24,20 +24,20 @@ export function ResumeSection() {
             degree: "B.Sc. in Computer Science and Engineering (CSE)",
             institution: "Southeast University",
             location: "Dhaka, Bangladesh",
-            period: "Current Year: 3rd Year (Ongoing)",
+            period: "Current Year: 4th Year (Ongoing)",
         },
         {
             degree: "Diploma in Computer Science and Technology (CST)",
             institution: "VTTI",
-            location: "",
+            location: "Bogura",
             period: "2018 – 2022",
         },
     ];
 
     const skills = {
-        "Frontend Frameworks": ["Next.js", "React.js", "Vue.js", "JavaScript (ES6+)"],
-        "Backend Frameworks": ["NestJS", "Node.js"],
-        "Databases & ORM": ["PostgreSQL", "Drizzle ORM"],
+        "Frontend Frameworks": ["Next.js", "React.js", "JavaScript (ES6+)"],
+        "Backend Frameworks": ["Node.js, Express.js"],
+        "Databases": ["MongoDB", "PostgreSQL", "MySQL",],
         "Styling & UI": ["Tailwind CSS", "Bootstrap CSS"],
         "Programming Languages": ["JavaScript", "C", "C++"],
     };
