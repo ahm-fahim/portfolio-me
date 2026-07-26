@@ -20,12 +20,7 @@ export function AboutSection() {
 
             <div className="grid gap-4 grid-cols-1 md:grid-cols-2 ">
                 <p className="text-lg text-gray-700 dark:text-gray-300 leading-relaxed py-2">
-                    Hey there 👋 I&#39;m <span className="font-semibold text-green-600 dark:text-green-400">Md. Fahim Morshed</span>,
-                    a Full Stack Developer with over 3+ years of experience, specializing in <span
-                    className="font-semibold">Next.js/React</span> frontend and <span
-                    className="font-semibold">NestJS/PostgreSQL</span> backend development. Currently pursuing a B.Sc.
-                    in CSE, with proven ability to build and deploy robust, full-stack applications and administrative
-                    panels.
+                    Computer Science and Engineering student with hands-on experience in full-stack web development using the MERN stack (MongoDB, Express.js, React.js, and Node.js). Experienced in building responsive web applications, developing RESTful APIs, and collaborating with remote development teams. Passionate about writing clean, maintainable code and continuously learning modern web technologies. Seeking a Junior Full Stack Developer or Software Engineer Internship opportunity
                 </p>
                 <div className="grid gap-4 grid-cols-1 border-l-2 px-2 bg-white/70 dark:bg-gray-900/70 rounded-br-md">
                     <div className="flex justify-between items-center pt-4">

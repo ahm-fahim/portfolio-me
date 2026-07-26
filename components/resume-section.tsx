@@ -52,8 +52,7 @@ export function ResumeSection() {
                 <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 mb-8">
                     <div className="lg:col-span-2">
                         <p className="text-gray-600 dark:text-gray-400 text-sm leading-relaxed">
-                            Highly motivated and results-oriented Full Stack Developer with a strong foundation in modern web technologies,
-                            specializing in the Next.js/React frontend ecosystem and NestJS/PostgreSQL backend development.
+                            Computer Science and Engineering student with hands-on experience in full-stack web development using the MERN stack (MongoDB, Express.js, React.js, and Node.js). Experienced in building responsive web applications, developing RESTful APIs, and collaborating with remote development teams. Passionate about writing clean, maintainable code and continuously learning modern web technologies. Seeking a Junior Full Stack Developer or Software Engineer Internship opportunity
                         </p>
                     </div>
                 </div>

@@ -1,7 +1,7 @@
 "use client"
 
 import {useState} from "react"
-import {ExternalLink} from "lucide-react"
+import { ExternalLink } from "lucide-react"
 
 export function ProjectsSection() {
     const [filter, setFilter] = useState("all")
@@ -9,21 +9,21 @@ export function ProjectsSection() {
     const projects = [
         {
             id: 1,
-            title: "Family Star - Social Media",
-            category: "full-stack",
-            image: "/social-media-app.jpg",
+            title: "My Comfort | E-commerce Platform",
+            category: "ecommerce",
+            image: "/assets/mycomfort1.png",
             description:
                 "Architected complete backend with NestJS and PostgreSQL. Built admin panel using Next.js for content moderation.",
-            tech: ["NestJS", "PostgreSQL", "Next.js", "Tailwind CSS"],
-            link: "#",
+            tech: ["React.js", "Tailwind CSS"],
+            link: "https://spontaneous-gingersnap-2a7e1b.netlify.app/",
         },
         {
             id: 2,
-            title: "Learn Tech",
+            title: "Portfolio",
             category: "landing",
-            image: "/qa-testing-platform.jpg",
+            image: "/assets/portfolio1.png",
             description: "High-quality landing page showcasing QA testing services and features.",
-            tech: ["Next.js", "Tailwind CSS", "React"],
+            tech: ["Next.js", "Tailwind CSS",],
             link: "https://qaunlocked.com/",
         },
         {
@@ -115,7 +115,7 @@ export function ProjectsSection() {
                                     style={{animationDelay: `${i * 0.1}s`}}
                                 >
                                     <div className="relative overflow-hidden aspect-video bg-muted">
-                                        <img
+                                        <img  
                                             src={project.image || "/placeholder.svg"}
                                             alt={project.title}
                                             className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
