@@ -1,12 +1,12 @@
 // app/page.tsx
 "use client"
 
+
 import { useEffect, useRef, useState, useCallback, } from "react"
 import { Sidebar } from "@/components/sidebar"
 import { AboutSection } from "@/components/about-section"
 import { ResumeSection } from "@/components/resume-section"
 import { ProjectsSection } from "@/components/projects-section"
-import { ArticlesSection } from "@/components/articles-section"
 import { ContactSection } from "@/components/contact-section"
 
 export default function Home() {
@@ -20,7 +20,6 @@ export default function Home() {
         { component: <AboutSection key="about" />, title: "About" },
         { component: <ResumeSection key="resume" />, title: "Resume" },
         { component: <ProjectsSection key="projects" />, title: "Works" },
-        { component: <ArticlesSection key="articles" />, title: "Blog" },
         { component: <ContactSection key="contact" />, title: "Get in Touch" },
     ]
 
@@ -117,7 +116,7 @@ export default function Home() {
                     }}
                 >
                     {sections.map((section, idx) => (
-                        <div key={idx} className="scroll-snap-section dark:bg-radial-[at_25%_25%] from-gray-900 to-gray-700 to-75% relative" id={`section-${idx}`}>
+                        <div key={idx} className="scroll-snap-section p-3 md:p-0 dark:bg-radial-[at_25%_25%] from-gray-900 to-gray-700 to-75% relative" id={`section-${idx}`}>
                             <div className="bg-pattern"></div>
                             {section.component}
                         </div>

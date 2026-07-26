@@ -12,7 +12,6 @@ import {
     FaExternalLinkAlt, 
     FaFolderOpen 
 } from "react-icons/fa"
-import { TechnicalSkillsSection } from "./technical-skills-section"
 import { ResumeDetails } from "./resume-details"
 
 export function ResumeSection() {
@@ -40,7 +39,7 @@ export function ResumeSection() {
     ]
 
     return (
-        <section className="h-[96vh] overflow-y-scroll w-full md:p-4 py-10 space-y-8 animate-fade-in text-gray-800 dark:text-gray-200">
+        <section className="w-full h-[96vh] overflow-y-scroll scrollbar-none [ms-overflow-style:none] [scrollbar-width:none] md:p-4 py-10 [&::-webkit-scrollbar]:hidden">
             
             <div className="flex justify-start items-start border-b-[0.5px] dark:border-gray-800 pb-3">
                 <h1 className="text-2xl font-bold"><span className="text-green-600">R</span>esume</h1>
@@ -98,7 +97,6 @@ export function ResumeSection() {
             {/* Professional Summary */}
             <div className=" p-4">
                 <h2 className="text-xl font-bold mb-3 flex items-center gap-2 text-gray-900 dark:text-white">
-                    <span className="w-2 h-6 bg-green-600 rounded-full inline-block"></span>
                     Professional Summary
                 </h2>
                 <p className="leading-relaxed text-gray-700 dark:text-gray-300">

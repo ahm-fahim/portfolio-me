@@ -10,7 +10,7 @@ import {MdAdminPanelSettings} from "react-icons/md";
 
 export function AboutSection() {
     return (
-        <div className="h-[96vh] overflow-y-scroll w-full md:p-4 py-10 " >
+        <div className="w-full h-[96vh] overflow-y-scroll scrollbar-none [ms-overflow-style:none] [scrollbar-width:none] md:p-4 py-10 [&::-webkit-scrollbar]:hidden" >
 
 
             {/*about me section */}

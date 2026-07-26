@@ -54,7 +54,7 @@ export function Sidebar({ activeSection, onNavigate }: SidebarProps) {
         { name: "ABOUT", icon: User, id: 0 },
         { name: "RESUME", icon: FileText, id: 1 },
         { name: "PROJECTS", icon: Briefcase, id: 2 },
-        { name: "ARTICLES", icon: Edit3, id: 3 },
+        // { name: "ARTICLES", icon: Edit3, id: 3 },
         { name: "CONTACT", icon: Mail, id: 4 },
     ], [])
 
@@ -137,7 +137,7 @@ export function Sidebar({ activeSection, onNavigate }: SidebarProps) {
     return (
         <>
             {/* Mobile Header */}
-            <div className="fixed z-40 px-3 py-2 flex items-center justify-between w-full md:hidden bg-card/80 dark:text-white  backdrop-blur-sm">
+            <div className="fixed z-40 px-3 py-2 flex items-center justify-between w-full md:hidden dark:bg-gray-900 dark:text-white  backdrop-blur-sm">
                 <div>
                     <h1 className="text-[12px] play-bold">Md. Fahim Morshed</h1>
                     <div className="text-[9px] text-green-600">
@@ -176,14 +176,14 @@ export function Sidebar({ activeSection, onNavigate }: SidebarProps) {
             {/* Overlay */}
             {isDrawerOpen && (
                 <div
-                    className="fixed inset-0 bg-black/50 z-40 transition-opacity duration-300"
+                    className="fixed inset-0 bg-gray-900/50 z-40 transition-opacity duration-300"
                     onClick={() => setIsDrawerOpen(false)}
                 />
             )}
 
             {/* Drawer */}
             <div
-                className={`fixed left-0 top-0 h-screen w-72 dark:bg-black bg-white/95 dark:text-white z-50 flex flex-col transition-transform duration-300 ${
+                className={`fixed left-0 top-0 h-screen w-72 dark:bg-gray-900 bg-white/95 dark:text-white z-50 flex flex-col transition-transform duration-300 ${
                     isDrawerOpen ? "translate-x-0" : "-translate-x-full"
                 }`}
             >
@@ -224,7 +224,7 @@ export function Sidebar({ activeSection, onNavigate }: SidebarProps) {
 
             {/* Mobile Bottom Navigation */}
             {isMobile && (
-                <div className="fixed bottom-0 left-0 right-0 z-40 bg-card/80 backdrop-blur-sm dark:text-white dark:border-gray-800 border-gray-100 md:hidden border-t">
+                <div className="fixed bottom-0 left-0 right-0 z-40 dark:bg-gray-900 backdrop-blur-sm dark:text-white  md:hidden border-t">
                     <div className="flex items-center justify-around h-20 px-4">
                         {sections.map((section) => (
                             <NavItem
