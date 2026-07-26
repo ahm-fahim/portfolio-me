@@ -54,8 +54,7 @@ export function Sidebar({ activeSection, onNavigate }: SidebarProps) {
         { name: "ABOUT", icon: User, id: 0 },
         { name: "RESUME", icon: FileText, id: 1 },
         { name: "PROJECTS", icon: Briefcase, id: 2 },
-        // { name: "ARTICLES", icon: Edit3, id: 3 },
-        { name: "CONTACT", icon: Mail, id: 4 },
+        { name: "CONTACT", icon: Mail, id: 3 },
     ], [])
 
     const socialLinks: SocialLink[] = React.useMemo(() => [
