@@ -70,7 +70,7 @@ export default function RootLayout({ children }: RootLayoutProps) {
             className={fontVariables}
         >
         <body className={`font-sans antialiased`}>
-        <ThemeProvider defaultTheme="system" storageKey="app-theme">
+        <ThemeProvider defaultTheme="system"  storageKey="app-theme">
             {children}
         </ThemeProvider>
         <Analytics />

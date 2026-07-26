@@ -55,9 +55,9 @@
 
 /* Dark theme - Fully Dark */
 .dark {
-    --background: oklch(0.0 0 0); /* Pure black */
+    --background: oklch(21% 0.034 264.665); /* Pure black */
     --foreground: oklch(0.985 0 0);
-    --card: oklch(0.1 0 0); /* Very dark gray */
+    --card: oklch(21% 0.034 264.665); /* Very dark gray */
     --card-foreground: oklch(0.985 0 0);
     --popover: oklch(0.1 0 0);
     --popover-foreground: oklch(0.985 0 0);

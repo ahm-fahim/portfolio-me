@@ -243,7 +243,7 @@ export function Sidebar({ activeSection, onNavigate }: SidebarProps) {
             {!isMobile && (
                 <div className="flex p-2">
                     <div className="h-3/4 my-auto z-30 border-l border-b border-green-600 rounded-[100px]">
-                        <div className="hidden bg-white dark:bg-black/95 dark:text-white md:flex h-full my-auto -mr-5 rounded-[100px] m-2 w-24 border border-gray-100 dark:border-gray-800 flex-col items-center justify-center">
+                        <div className="hidden bg-white dark:bg-gray-900 dark:text-white md:flex h-full my-auto -mr-5 rounded-[100px] m-2 w-24 border border-gray-100 dark:border-gray-800 flex-col items-center justify-center">
                             {/* **UPDATED SECTION: Added relative to container and the smoothly moving indicator** */}
                             <div className="flex flex-col items-center justify-center gap-6 w-full relative">
 

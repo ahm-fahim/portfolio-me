@@ -12,7 +12,7 @@ export default function Me() {
         <div
             className="trapezoid h-[85vh] w-[55vh] mx-auto my-auto text-white overflow-hidden flex flex-col">
 
-            <SplashCursor/>
+            {/* <SplashCursor/> */}
 
             <div className="relative w-full aspect-[4/5] h-full overflow-hidden">
 
@@ -28,7 +28,7 @@ export default function Me() {
             </div>
 
 
-            <div className="bg-gray-800/80 backdrop-blur-lg">
+            <div className="bg-gray-800 backdrop-blur-lg">
                 <div className="p-6 flex flex-col items-center flex-grow">
                     <h1 className="text-3xl play-bold tracking-wide pt-4">Md. Fahim Morshed</h1>
                     <div className="flex items-center space-x-2 mb-8 text-xl text-green-400 font-medium">

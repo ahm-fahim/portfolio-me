@@ -13,7 +13,7 @@ export function ProjectsSection() {
             category: "ecommerce",
             image: "/assets/mycomfort1.png",
             description:
-                "Architected complete backend with NestJS and PostgreSQL. Built admin panel using Next.js for content moderation.",
+                "Architected complete frontend with React.js and Tailwind.css",
             tech: ["React.js", "Tailwind CSS"],
             link: "https://spontaneous-gingersnap-2a7e1b.netlify.app/",
         },
@@ -22,7 +22,7 @@ export function ProjectsSection() {
             title: "Portfolio Me",
             category: "landing",
             image: "/assets/portfolio2.png",
-            description: "High-quality landing page showcasing QA testing services and features.",
+            description: "Next.js and Tailwind.css used to build this projects",
             tech: ["Next.js", "Tailwind CSS",],
             link: "https://rococo-praline-337a91.netlify.app/",
         },
@@ -48,7 +48,7 @@ export function ProjectsSection() {
                             <div className="flex items-center justify-between flex-wrap gap-6">
                                 <div className="flex items-center gap-3">
                                     <div className="w-2 h-2 rounded-full bg-accent"></div>
-                                    <h2 className="text-3xl font-bold">Works</h2>
+                                    <h2 className="text-3xl font-bold"><span className="text-green-500">W</span>ork</h2>
                                 </div>
                             </div>
 
