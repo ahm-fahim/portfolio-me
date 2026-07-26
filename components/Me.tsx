@@ -53,17 +53,24 @@ export default function Me() {
                     </div>
                 </div>
                 <div className="flex border-t border-gray-600 w-full text-center text-md font-semibold pb-10 ">
-                    <button
-                        className="flex-1 py-4 flex items-center justify-center space-x-2 text-white hover:bg-gray-800 transition duration-200">
+                    {/* Resume Download Link */}
+                    <a
+                        href="/resume.pdf"
+                        download="Md Fahim Morshed - Resume.pdf"
+                        className="flex-1 py-4 flex items-center justify-center space-x-2 text-white hover:bg-gray-800 transition duration-200"
+                    >
                         <span>DOWNLOAD CV</span>
-                        <CloudDownload/>
-                    </button>
+                        <CloudDownload />
+                    </a>
 
-                    <button
-                        className="flex-1 py-4 flex items-center justify-center space-x-2 border-l border-gray-600 text-white hover:bg-gray-800 transition duration-200">
+                    {/* Contact Link */}
+                    <a
+                        href="#section-3"
+                        className="flex-1 py-4 flex items-center justify-center space-x-2 border-l border-gray-600 text-white hover:bg-gray-800 transition duration-200"
+                    >
                         <span>CONTACT ME</span>
-                        <Phone/>
-                    </button>
+                        <Phone />
+                    </a>
                 </div>
             </div>
 

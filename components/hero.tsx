@@ -24,7 +24,7 @@ export function Hero() {
         setDownloaded(true)
         const link = document.createElement('a')
         link.href = '/resume.pdf'
-        link.download = 'Md_Fahim_Morshed_CV.pdf'
+        link.download = 'Md Fahim Morshed - Resume.pdf'
         link.click()
         
         setTimeout(() => setDownloaded(false), 3000)
