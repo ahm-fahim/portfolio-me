@@ -1,176 +1,116 @@
-// resume-section.tsx
-"use client";
+"use client"
 
-import React from "react";
+import { 
+    FaEnvelope, 
+    FaPhone, 
+    FaMapMarkerAlt, 
+    FaGithub, 
+    FaLinkedin, 
+    FaGraduationCap, 
+    FaBriefcase, 
+    FaCode, 
+    FaExternalLinkAlt, 
+    FaFolderOpen 
+} from "react-icons/fa"
+import { TechnicalSkillsSection } from "./technical-skills-section"
+import { ResumeDetails } from "./resume-details"
 
 export function ResumeSection() {
-    const professionalExperience = [
-        {
-            title: "FULL STACK DEVELOPER",
-            company: "Pintag, US",
-            location: "Remote",
-            period: "January 2025 – October 2025",
-        },
-        {
-            title: "WEB DESIGNER TRAINER",
-            company: "Department Of  Youth Development, Bogura",
-            location: "Bogura",
-            period: "November 2022 - December 2022 ",
-        },
-    ];
+    const skills = [
+        "JavaScript", "HTML5", "CSS3", "React.js", "Node.js", 
+        "Express.js", "MongoDB", "MySQL", "Git", "GitHub", 
+        "Postman", "VS Code", "Jira", "Figma", "REST APIs", "JWT", "CRUD", "MVC"
+    ]
 
-    const education = [
+    const projects = [
         {
-            degree: "B.Sc. in Computer Science and Engineering (CSE)",
-            institution: "Southeast University",
-            location: "Dhaka, Bangladesh",
-            period: "Current Year: 4th Year (Ongoing)",
+            title: "E-Commerce Platform",
+            description: "Full-stack e-commerce web application with user authentication, product management, and dynamic cart operations.",
+            tech: ["React.js", "Node.js", "MongoDB", "Express.js"],
+            github: "https://github.com/ahm-fahim",
+            live: "#"
         },
         {
-            degree: "Diploma in Computer Science and Technology (CST)",
-            institution: "VTTI",
-            location: "Bogura",
-            period: "2018 – 2022",
-        },
-    ];
-
-    const skills = {
-        "Frontend Frameworks": ["Next.js", "React.js", "JavaScript (ES6+)"],
-        "Backend Frameworks": ["Node.js, Express.js"],
-        "Databases": ["MongoDB", "PostgreSQL", "MySQL",],
-        "Styling & UI": ["Tailwind CSS", "Bootstrap CSS"],
-        "Programming Languages": ["JavaScript", "C", "C++"],
-    };
+            title: "Portfolio & CMS Dashboard",
+            description: "Responsive portfolio featuring clean UI, theme customization, and an admin dashboard for dynamic content updates.",
+            tech: ["React.js", "Tailwind CSS", "REST APIs"],
+            github: "https://github.com/ahm-fahim",
+            live: "#"
+        }
+    ]
 
     return (
-        <section className="h-[96vh] overflow-y-scroll py-8 px-4 sm:px-6 lg:px-8  transition-colors duration-300">
-            <div className="mx-auto">
-                <div className="flex justify-start items-start border-b dark:border-gray-800 pb-3">
-                    <h1 className="text-2xl font-bold"><span className="text-green-600">R</span>esume</h1>
-                </div>
-                {/* Header - Grid Layout */}
-                <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 mb-8">
-                    <div className="lg:col-span-2">
-                        <p className="text-gray-600 dark:text-gray-400 text-sm leading-relaxed">
-                            Computer Science and Engineering student with hands-on experience in full-stack web development using the MERN stack (MongoDB, Express.js, React.js, and Node.js). Experienced in building responsive web applications, developing RESTful APIs, and collaborating with remote development teams. Passionate about writing clean, maintainable code and continuously learning modern web technologies. Seeking a Junior Full Stack Developer or Software Engineer Internship opportunity
+        <section className="h-[96vh] overflow-y-scroll w-full md:p-4 py-10 space-y-8 animate-fade-in text-gray-800 dark:text-gray-200">
+            
+            <div className="flex justify-start items-start border-b-[0.5px] dark:border-gray-800 pb-3">
+                <h1 className="text-2xl font-bold"><span className="text-green-600">R</span>esume</h1>
+            </div>
+            {/* Header Section */}
+            <div className="  p-4 ">
+                <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-6">
+                    <div>
+                        <h1 className="text-3xl md:text-4xl font-bold text-gray-900 dark:text-white">
+                            MD. FAHIM MORSHED
+                        </h1>
+                        <p className="text-green-600 dark:text-green-400 font-semibold mt-1 text-lg">
+                            Full Stack Developer
                         </p>
                     </div>
+
+                    {/* Social & Contact Links */}
+                    <div className="flex flex-wrap gap-4 text-sm">
+                        <a 
+                            href="https://github.com/ahm-fahim" 
+                            target="_blank" 
+                            rel="noopener noreferrer" 
+                            className="flex items-center gap-2 px-3 py-2 bg-gray-100 dark:bg-gray-800 rounded-lg hover:bg-green-600 hover:text-white transition-all"
+                        >
+                            <FaGithub className="text-lg" /> GitHub
+                        </a>
+                        <a 
+                            href="https://linkedin.com/in/md-fahim-morshed-5b2126233" 
+                            target="_blank" 
+                            rel="noopener noreferrer" 
+                            className="flex items-center gap-2 px-3 py-2 bg-gray-100 dark:bg-gray-800 rounded-lg hover:bg-green-600 hover:text-white transition-all"
+                        >
+                            <FaLinkedin className="text-lg text-blue-500" /> LinkedIn
+                        </a>
+                    </div>
                 </div>
 
-                {/* Main Content Grid */}
-                <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
-                    {/* Left Column - Experience & Education */}
-                    <div className="lg:col-span-2 space-y-6">
-                        {/* Work Experience */}
-                        <div className="bg-gray-50/80 dark:bg-gray-800/50 rounded-lg p-4 border border-gray-200 dark:border-gray-700">
-                            <h2 className="text-lg font-semibold text-green-600 dark:text-green-400 mb-4 flex items-center gap-2">
-                                <span className="w-2 h-2 bg-green-600 dark:bg-green-400 rounded-full"></span>
-                                PROFESSIONAL EXPERIENCE
-                            </h2>
-                            <div className="space-y-4">
-                                {professionalExperience.map((exp, index) => (
-                                    <div
-                                        key={index}
-                                        className="grid grid-cols-1 sm:grid-cols-4 gap-2 p-3 bg-white/50 dark:bg-gray-700/50 rounded border border-gray-100 dark:border-gray-600"
-                                    >
-                                        <div className="sm:col-span-3">
-                                            <h3 className="font-semibold text-gray-900 dark:text-white text-sm">
-                                                {exp.title}
-                                            </h3>
-                                            <p className="text-gray-600 dark:text-gray-400 text-xs">
-                                                {exp.company} {exp.location && `• ${exp.location}`}
-                                            </p>
-                                        </div>
-                                        <div className="text-green-600 dark:text-green-400 text-xs font-medium text-right sm:text-left">
-                                            {exp.period}
-                                        </div>
-                                    </div>
-                                ))}
-                            </div>
-                        </div>
-
-                        {/* Education */}
-                        <div className="bg-gray-50/80 dark:bg-gray-800/50 rounded-lg p-4 border border-gray-200 dark:border-gray-700">
-                            <h2 className="text-lg font-semibold text-green-600 dark:text-green-400 mb-4 flex items-center gap-2">
-                                <span className="w-2 h-2 bg-green-600 dark:bg-green-400 rounded-full"></span>
-                                EDUCATION
-                            </h2>
-                            <div className="space-y-4">
-                                {education.map((edu, index) => (
-                                    <div
-                                        key={index}
-                                        className="grid grid-cols-1 sm:grid-cols-4 gap-2 p-3 bg-white/50 dark:bg-gray-700/50 rounded border border-gray-100 dark:border-gray-600"
-                                    >
-                                        <div className="sm:col-span-3">
-                                            <h3 className="font-semibold text-gray-900 dark:text-white text-sm">
-                                                {edu.degree}
-                                            </h3>
-                                            <p className="text-gray-600 dark:text-gray-400 text-xs">
-                                                {edu.institution} {edu.location && `• ${edu.location}`}
-                                            </p>
-                                        </div>
-                                        <div className="text-green-600 dark:text-green-400 text-xs font-medium text-right sm:text-left">
-                                            {edu.period}
-                                        </div>
-                                    </div>
-                                ))}
-                            </div>
-                        </div>
+                {/* Quick Info Bar */}
+                <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 mt-6 pt-6 border-t-[0.5px] border-gray-100 dark:border-gray-800 text-sm">
+                    <div className="flex items-center gap-3">
+                        <FaMapMarkerAlt className="text-green-600 text-lg flex-shrink-0" />
+                        <span>Dhaka, Bangladesh</span>
                     </div>
-
-                    {/* Right Column - Skills */}
-                    <div className="space-y-6">
-                        <div className="bg-gray-50/80 dark:bg-gray-800/50 rounded-lg p-4 border border-gray-200 dark:border-gray-700">
-                            <h2 className="text-lg font-semibold text-green-600 dark:text-green-400 mb-4 flex items-center gap-2">
-                                <span className="w-2 h-2 bg-green-600 dark:bg-green-400 rounded-full"></span>
-                                TECHNICAL SKILLS
-                            </h2>
-                            <div className="space-y-4">
-                                {Object.entries(skills).map(([category, skillList]) => (
-                                    <div key={category} className="space-y-2">
-                                        <h3 className="font-medium text-gray-900 dark:text-white text-sm">
-                                            {category}
-                                        </h3>
-                                        <div className="grid grid-cols-2 gap-2">
-                                            {skillList.map((skill, index) => (
-                                                <span
-                                                    key={index}
-                                                    className="px-2 py-1 bg-green-100 dark:bg-green-900 text-green-800 dark:text-green-200 rounded text-xs font-medium text-center border border-green-200 dark:border-green-800"
-                                                >
-                          {skill}
-                        </span>
-                                            ))}
-                                        </div>
-                                    </div>
-                                ))}
-                            </div>
-                        </div>
-
-                        {/* Quick Info Card */}
-                        {/*<div className="bg-gray-50 dark:bg-gray-800 rounded-lg p-4 border border-gray-200 dark:border-gray-700">*/}
-                        {/*    <h2 className="text-lg font-semibold text-green-600 dark:text-green-400 mb-4 flex items-center gap-2">*/}
-                        {/*        <span className="w-2 h-2 bg-green-600 dark:bg-green-400 rounded-full"></span>*/}
-                        {/*        STATUS*/}
-                        {/*    </h2>*/}
-                        {/*    <div className="space-y-2 text-sm">*/}
-                        {/*        <div className="flex justify-between">*/}
-                        {/*            <span className="text-gray-600 dark:text-gray-400">Availability:</span>*/}
-                        {/*            <span className="text-green-600 dark:text-green-400 font-medium">Open</span>*/}
-                        {/*        </div>*/}
-                        {/*        <div className="flex justify-between">*/}
-                        {/*            <span className="text-gray-600 dark:text-gray-400">Employment:</span>*/}
-                        {/*            <span className="text-green-600 dark:text-green-400 font-medium">Full-time</span>*/}
-                        {/*        </div>*/}
-                        {/*        <div className="flex justify-between">*/}
-                        {/*            <span className="text-gray-600 dark:text-gray-400">Location:</span>*/}
-                        {/*            <span className="text-green-600 dark:text-green-400 font-medium">Remote</span>*/}
-                        {/*        </div>*/}
-                        {/*    </div>*/}
-                        {/*</div>*/}
+                    <div className="flex items-center gap-3">
+                        <FaPhone className="text-green-600 text-lg flex-shrink-0" />
+                        <span>+880 1790-298187</span>
+                    </div>
+                    <div className="flex items-center gap-3">
+                        <FaEnvelope className="text-green-600 text-lg flex-shrink-0" />
+                        <span>contactahmfahim@gmail.com</span>
                     </div>
                 </div>
             </div>
-        </section>
-    );
-};
 
+            {/* Professional Summary */}
+            <div className=" p-4">
+                <h2 className="text-xl font-bold mb-3 flex items-center gap-2 text-gray-900 dark:text-white">
+                    <span className="w-2 h-6 bg-green-600 rounded-full inline-block"></span>
+                    Professional Summary
+                </h2>
+                <p className="leading-relaxed text-gray-700 dark:text-gray-300">
+                    Computer Science and Engineering student with hands-on experience in MERN stack development. Experienced in building responsive web applications, REST APIs, and collaborating with remote development teams. Seeking a Junior Full Stack Developer, Frontend Developer, or Backend Developer Intern role.
+                </p>
+            </div>
+
+        
+            <ResumeDetails/>
+
+            
+
+        </section>
+    )
+}

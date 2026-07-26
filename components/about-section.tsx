@@ -22,7 +22,7 @@ export function AboutSection() {
                 <p className="text-lg text-gray-700 dark:text-gray-300 leading-relaxed py-2 md:border-r-[0.5px]  pr-4">
                     Computer Science and Engineering student with hands-on experience in full-stack web development using the MERN stack (MongoDB, Express.js, React.js, and Node.js). Experienced in building responsive web applications, developing RESTful APIs, and collaborating with remote development teams. Passionate about writing clean, maintainable code and continuously learning modern web technologies. Seeking a Junior Full Stack Developer or Software Engineer Internship opportunity
                 </p>
-                <div className="grid gap-4 grid-cols-1 px-2 bg-white/70 dark:bg-gray-100/0 rounded-br-md">
+                <div className="grid gap-4 grid-cols-1 px-2 rounded-br-md">
                     <div className="flex justify-between items-center  pt-4">
                         <h2 className="bg-green-600 px-4 py-1 text-sm rounded text-white dark:text-black">Location: </h2>
                         <p>Dhaka, Bangladesh </p>

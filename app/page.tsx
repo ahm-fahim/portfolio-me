@@ -108,7 +108,7 @@ export default function Home() {
                 {/* Main Content with fully dark background in dark mode */}
                 <div
                     ref={containerRef}
-                    className="flex-1 p-2 overflow-y-scroll md:border border-gray-200 dark:text-white dark:border-gray-800 md:rounded-4xl md:h-[90vh] md:my-auto scroll-snap-container my-0 md:mr-10 transition-all duration-500"
+                    className="flex-1 overflow-y-scroll md:border border-gray-200 dark:text-white dark:border-gray-800 md:rounded-4xl md:h-[90vh] md:my-auto scroll-snap-container my-0 md:mr-10 transition-all duration-500"
                     style={{
                         backgroundColor: currentTheme === 'dark'
                             ? 'rgba(0,0,0,0.29)'
@@ -117,7 +117,7 @@ export default function Home() {
                     }}
                 >
                     {sections.map((section, idx) => (
-                        <div key={idx} className="scroll-snap-section relative" id={`section-${idx}`}>
+                        <div key={idx} className="scroll-snap-section dark:bg-radial-[at_25%_25%] from-gray-900 to-gray-700 to-75% relative" id={`section-${idx}`}>
                             <div className="bg-pattern"></div>
                             {section.component}
                         </div>
