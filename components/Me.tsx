@@ -4,7 +4,7 @@ import Image from "next/image";
 import img from "@/public/me.jpg";
 import {CloudDownload, GithubIcon, LinkedinIcon, Phone} from "lucide-react";
 import TextType from '@/components/TextType';
-import SplashCursor from "@/components/SplashCursor";
+// import SplashCursor from "@/components/SplashCursor";
 
 export default function Me() {
     return (

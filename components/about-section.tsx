@@ -6,12 +6,16 @@ import {BiLogoPostgresql} from "react-icons/bi";
 import {RiTailwindCssFill} from "react-icons/ri";
 import {TbBrandCpp} from "react-icons/tb";
 import {MdAdminPanelSettings} from "react-icons/md";
+import { Hero } from "./hero";
 
 
 export function AboutSection() {
     return (
         <div className="w-full h-[96vh] overflow-y-scroll scrollbar-none [ms-overflow-style:none] [scrollbar-width:none] md:p-4 py-10 [&::-webkit-scrollbar]:hidden" >
-
+            
+            <div className="block sm:hidden py-10">
+                <Hero/>
+            </div>
 
             {/*about me section */}
             <div className="flex justify-start items-start border-b-[0.5px] dark:border-gray-800 pb-3">
