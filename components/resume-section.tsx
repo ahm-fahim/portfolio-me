@@ -100,7 +100,12 @@ export function ResumeSection() {
                     Professional Summary
                 </h2>
                 <p className="leading-relaxed text-gray-700 dark:text-gray-300">
-                    Computer Science and Engineering student with hands-on experience in MERN stack development. Experienced in building responsive web applications, REST APIs, and collaborating with remote development teams. Seeking a Junior Full Stack Developer, Frontend Developer, or Backend Developer Intern role.
+                    Computer Science and Engineering student with hands-on experience in full-stack web
+development using the MERN stack (MongoDB, Express.js, React.js, and Node.js).
+Experienced in building responsive web applications, developing RESTful APIs, and
+collaborating with remote development teams. Passionate about writing clean,
+maintainable code and continuously learning modern web technologies. Seeking a Full
+Stack or Frontend Developer opportunity.
                 </p>
             </div>
 
