@@ -56,7 +56,7 @@ export default function Me() {
                     {/* Resume Download Link */}
                     <a
                         href="/resume.pdf"
-                        download="Md Fahim Morshed - Resume.pdf"
+                        download="Md_Fahim_Morshed_Resume.pdf"
                         className="flex-1 py-4 flex items-center justify-center space-x-2 text-white hover:bg-gray-800 transition duration-200"
                     >
                         <span>DOWNLOAD CV</span>
