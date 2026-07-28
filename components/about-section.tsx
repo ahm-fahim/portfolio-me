@@ -11,7 +11,7 @@ import { Hero } from "./hero";
 
 export function AboutSection() {
     return (
-        <div className="w-full h-[96vh] overflow-y-scroll scrollbar-none [ms-overflow-style:none] [scrollbar-width:none] md:p-4 py-10 [&::-webkit-scrollbar]:hidden" >
+        <div className="w-full h-[96vh] overflow-y-scroll scrollbar-none [ms-overflow-style:none] [scrollbar-width:none] md:p-4 py-10 pb-20 [&::-webkit-scrollbar]:hidden" >
             
             <div className="block sm:hidden py-10">
                 <Hero/>

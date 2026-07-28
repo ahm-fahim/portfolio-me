@@ -39,7 +39,7 @@ export function ResumeSection() {
     ]
 
     return (
-        <section className="w-full h-[96vh] overflow-y-scroll scrollbar-none [ms-overflow-style:none] [scrollbar-width:none] md:p-4 py-10 [&::-webkit-scrollbar]:hidden">
+        <section className="w-full h-[96vh] overflow-y-scroll scrollbar-none [ms-overflow-style:none] [scrollbar-width:none] md:p-4 py-10 pb-20 [&::-webkit-scrollbar]:hidden">
             
             <div className="flex justify-start items-start border-b-[0.5px] dark:border-gray-800 pb-3">
                 <h1 className="text-2xl font-bold"><span className="text-green-600">R</span>esume</h1>

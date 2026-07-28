@@ -42,7 +42,7 @@ export function ProjectsSection() {
         filter === "all" ? projects : projects.filter((p) => p.category === filter)
 
     return (
-        <main className="w-full h-[96vh] overflow-y-scroll scrollbar-none [ms-overflow-style:none] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden md:p-6 py-8">
+        <main className="w-full h-[96vh] overflow-y-scroll scrollbar-none [ms-overflow-style:none] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden md:p-4 py-10 pb-20">
             <div className="space-y-8 animate-fade-in">
                 <section>
                     {/* Header & Category Filters */}

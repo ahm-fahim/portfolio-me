@@ -32,7 +32,7 @@ export function ContactSection() {
     }
 
     return (
-        <main className="w-full h-[96vh] overflow-y-scroll scrollbar-none [ms-overflow-style:none] [scrollbar-width:none] md:p-4 py-10 [&::-webkit-scrollbar]:hidden">
+        <main className="w-full h-[96vh] overflow-y-scroll scrollbar-none [ms-overflow-style:none] [scrollbar-width:none] md:p-4 py-10 pb-20 [&::-webkit-scrollbar]:hidden">
             <div className="max-w-5xl mx-auto space-y-8 animate-fade-in">
                 
                 {/* Header Section */}
